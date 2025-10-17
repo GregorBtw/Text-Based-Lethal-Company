@@ -8,6 +8,14 @@ public class Map
 
     public IMoveBehaviour MoveBehaviour { get; set; }
 
+    //Constructor
+
+    public Map(IMoveBehaviour moveBehaviour)
+    {
+        this.Rooms = new Dictionary<string, Room>();
+        this.MoveBehaviour = moveBehaviour;
+    }
+
     //Methods
     public void AddRoom(Room room)
     {

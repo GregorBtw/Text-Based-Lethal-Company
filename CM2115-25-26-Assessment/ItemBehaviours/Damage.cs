@@ -5,6 +5,11 @@ public class Damage : IItemBehaviour{
     //Attributes#
     public IAttackBehaviour AttackBehaviour;
 
+    //Constructor
+    public Damage(IAttackBehaviour attackBehaviour) {
+        this.AttackBehaviour = attackBehaviour;
+    }
+
     //Methods
 
     public void Use()

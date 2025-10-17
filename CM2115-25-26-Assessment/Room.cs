@@ -12,6 +12,16 @@ public class Room : IRoom
 
     public Dictionary<String, Room> SurroundingRooms { get; set; }
 
+    //Constructor
+    
+    public Room(String name, Item[] items, String information, Dictionary<String, Room> surroundingRooms)
+    {
+        this.Name = name;
+        this.Items = items;
+        this.Information = information;
+        this.SurroundingRooms = surroundingRooms;
+    }
+
     //Methods
 
     public void DisplayScrap()

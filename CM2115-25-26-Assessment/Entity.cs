@@ -12,6 +12,12 @@ public class Entity{
     public Room CurrentRoom;
 
     //Constructor
+    public Entity(String name, int hp, Room currentRoom)
+    {
+        this.Name = name;
+        this.HP = hp;
+        this.CurrentRoom = currentRoom;
+    }
 
     //Methods
     

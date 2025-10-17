@@ -12,6 +12,15 @@ public class Puzzle
 
     public IPuzzleBehaviours PuzzleBehaviour;
 
+    //Constructor
+    public Puzzle(int attemptsLeft, String answer, IPuzzleBehaviours puzzleBehaviour)
+    {
+        this.AttemptsLeft = attemptsLeft;
+        this.Answer = answer;
+        this.PuzzleBehaviour = puzzleBehaviour;
+        this.isSolved = false;
+    }
+
     //Methods
     public void AttemptPuzzle()
     {

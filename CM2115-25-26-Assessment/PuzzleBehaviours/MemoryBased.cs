@@ -11,6 +11,14 @@ public class MemoryBased : IPuzzleBehaviours
 
     public String[] PlayerSequence;
 
+    //constructor
+    public MemoryBased(String description, String[] sequence)
+    {
+        this.Description = description;
+        this.Sequence = sequence;
+        this.IsCompleted = false;
+    }
+
     //Methods
     public void PromptPuzzle()
     {

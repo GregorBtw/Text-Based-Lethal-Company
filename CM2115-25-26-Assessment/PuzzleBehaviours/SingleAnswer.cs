@@ -11,6 +11,15 @@ public class SingleAnswer : IPuzzleBehaviours
 
     public String Question;
 
+    //constructor
+    public SingleAnswer(String description, String question, String answer)
+    {
+        this.Description = description;
+        this.Question = question;
+        this.Answer = answer;
+        this.IsCompleted = false;
+    }
+
     //Methods
     public void PromptPuzzle()
     {

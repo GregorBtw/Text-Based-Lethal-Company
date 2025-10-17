@@ -9,6 +9,13 @@ public class Item
 
     //Constructor
 
+    public Item(String name, int value, IItemBehaviour itemBehaviour)
+    {
+        this.Name = name;
+        this.Value = value;
+        this.ItemBehaviour = itemBehaviour;
+    }
+
 
     //Methods
 
