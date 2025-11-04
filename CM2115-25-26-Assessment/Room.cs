@@ -1,4 +1,7 @@
-using CM2115_25_26_Assessment;
+using interfaces.room;
+using items;
+
+namespace rooms;
 
 public class Room : IRoom
 {
@@ -13,7 +16,7 @@ public class Room : IRoom
     public Dictionary<String, Room> SurroundingRooms { get; set; }
 
     //Constructor
-    
+
     public Room(String name, Item[] items, String information, Dictionary<String, Room> surroundingRooms)
     {
         this.Name = name;

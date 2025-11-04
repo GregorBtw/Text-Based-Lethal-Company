@@ -1,7 +1,13 @@
 using System;
+using entitys;
+using inventory;
+using rooms;
+
+namespace entitys.players;
 
 
-public class Player : Entity {
+public class Player : Entity
+{
 
     //Attributes
 
@@ -16,6 +22,6 @@ public class Player : Entity {
     //Methods
     public void Initialise()
     {
-         //Initialise player attributes
+        //Initialise player attributes
     }
 }

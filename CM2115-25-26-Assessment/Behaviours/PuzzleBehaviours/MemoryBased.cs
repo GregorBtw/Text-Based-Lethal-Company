@@ -1,6 +1,8 @@
-using CM2115_25_26_Assessment;
+using System.Collections.Generic;
+using interfaces.puzzlebehaviours;
 using System;
 
+namespace behaviours.puzzlebehaviours;
 public class MemoryBased : IPuzzleBehaviours
 {
     //Attributes

@@ -1,12 +1,16 @@
 using System.Runtime.CompilerServices;
-using CM2115_25_26_Assessment;
+using interfaces.itembehaviours;
+using interfaces.attackbehaviours;
 
-public class Damage : IItemBehaviour{
+namespace behaviours.itembehaviours;
+public class Damage : IItemBehaviour
+{
     //Attributes#
     public IAttackBehaviour AttackBehaviour;
 
     //Constructor
-    public Damage(IAttackBehaviour attackBehaviour) {
+    public Damage(IAttackBehaviour attackBehaviour)
+    {
         this.AttackBehaviour = attackBehaviour;
     }
 
@@ -19,6 +23,6 @@ public class Damage : IItemBehaviour{
     }
     public void Equip()
     {
-        
+
     }
 }

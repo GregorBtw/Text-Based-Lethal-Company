@@ -1,6 +1,7 @@
-using CM2115_25_26_Assessment;
+using interfaces.puzzlebehaviours;
 using System;
 
+namespace behaviours.puzzlebehaviours;
 public class SingleAnswer : IPuzzleBehaviours
 {
     //Attributes

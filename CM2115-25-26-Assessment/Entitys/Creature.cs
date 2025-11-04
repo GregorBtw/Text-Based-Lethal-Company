@@ -1,5 +1,9 @@
 using System.Reflection.Metadata.Ecma335;
-using CM2115_25_26_Assessment;
+using entitys;
+using rooms;
+using interfaces.attackbehaviours;
+
+namespace entitys.Creatures;
 
 public class Creature : Entity
 {

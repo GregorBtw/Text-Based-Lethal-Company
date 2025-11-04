@@ -1,6 +1,7 @@
 using System;
+using entitys;
 
-namespace CM2115_25_26_Assessment;
+namespace interfaces.attackbehaviours;
 
 public interface IAttackBehaviour
 {

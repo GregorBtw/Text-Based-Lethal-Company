@@ -1,6 +1,7 @@
-using CM2115_25_26_Assessment;
 using System;
+using interfaces.puzzlebehaviours;
 
+namespace puzzles;
 public class Puzzle
 {
     //Attributes

@@ -1,4 +1,10 @@
-public class Inventory{
+using System;
+using items;
+
+namespace inventory;
+
+public class Inventory
+{
 
     //Attributes
 

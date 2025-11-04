@@ -1,5 +1,8 @@
-using CM2115_25_26_Assessment;
+using System;
+using entitys;
+using interfaces.attackbehaviours;
 
+namespace behaviours.attackbehaviours;
 public class InstantKill : IAttackBehaviour
 {
 

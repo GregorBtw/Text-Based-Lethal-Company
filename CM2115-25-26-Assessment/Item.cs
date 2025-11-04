@@ -1,5 +1,7 @@
-using CM2115_25_26_Assessment;
+using System;
+using interfaces.itembehaviours;
 
+namespace items;
 public class Item
 {
     //Attributes

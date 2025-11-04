@@ -1,5 +1,8 @@
-using CM2115_25_26_Assessment;
 using System.Collections.Generic;
+using interfaces.movebehaviours;
+using rooms;
+
+namespace maps;
 
 public class Map
 {

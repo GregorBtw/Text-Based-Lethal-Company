@@ -1,6 +1,8 @@
 using System;
+using rooms;
+using interfaces.movebehaviours;
 
-namespace CM2115_25_26_Assessment;
+namespace interfaces.map;
 
 public interface IMap
 {

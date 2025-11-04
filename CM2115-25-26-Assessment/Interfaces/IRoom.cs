@@ -1,6 +1,8 @@
 using System;
+using rooms;
+using items;
 
-namespace CM2115_25_26_Assessment;
+namespace interfaces.room;
 
 public interface IRoom
 {

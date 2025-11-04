@@ -1,7 +1,11 @@
 using System.Reflection.Metadata.Ecma335;
-using CM2115_25_26_Assessment;
+using rooms;
+using interfaces.attackbehaviours;
 
-public class Entity{
+namespace entitys;
+
+public class Entity
+{
 
     //Attributes
 
@@ -20,7 +24,7 @@ public class Entity{
     }
 
     //Methods
-    
+
     public void DealDamage(IAttackBehaviour AttackBehaviour)
     {
         //Implementation of dealing damage logic
