@@ -20,8 +20,8 @@ public class Map
     }
 
     //Methods
-    public void AddRoom(Room room)
+    public void AddRoom(String coord,Room room)
     {
-        //Implementation of adding room to the map
+        Rooms.Add(coord, room);
     }
 }

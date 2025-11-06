@@ -3,26 +3,26 @@ using items;
 
 namespace rooms;
 
-public class Room : IRoom
+public class Room
 {
 
     //Attributes
-    public String Name { get; set; }
+    public String Name;
 
-    public Item[] Items { get; set; }
+    public Item[] Items;
 
-    public String Information { get; set; }
+    public String Information;
 
-    public Dictionary<String, Room> SurroundingRooms { get; set; }
+    public Dictionary<String, Room> SurroundingRooms;
 
     //Constructor
 
-    public Room(String name, Item[] items, String information, Dictionary<String, Room> surroundingRooms)
+    public Room(RoomBuilder Builder)
     {
-        this.Name = name;
-        this.Items = items;
-        this.Information = information;
-        this.SurroundingRooms = surroundingRooms;
+        this.Name = Builder.name;
+        this.Items = Builder.Items;
+        this.Information = Builder.Information;
+        this.SurroundingRooms = Builder.SurroundingRooms;
     }
 
     //Methods
