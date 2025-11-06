@@ -1,14 +1,9 @@
-using System;
 using interfaces.itembehaviours;
 
 namespace behaviours.itembehaviours;
-public class Tool : IItemBehaviour
+
+public class ValueItem : IItemBehaviour
 {
-
-    //Attributes
-
-    //Methods
-
     public void Use()
     {
         //Implementation of item use logic

@@ -3,13 +3,13 @@ using interfaces.itembehaviours;
 using interfaces.attackbehaviours;
 
 namespace behaviours.itembehaviours;
-public class Damage : IItemBehaviour
+public class DamageItem : IItemBehaviour
 {
     //Attributes#
     public IAttackBehaviour AttackBehaviour;
 
     //Constructor
-    public Damage(IAttackBehaviour attackBehaviour)
+    public DamageItem(IAttackBehaviour attackBehaviour)
     {
         this.AttackBehaviour = attackBehaviour;
     }

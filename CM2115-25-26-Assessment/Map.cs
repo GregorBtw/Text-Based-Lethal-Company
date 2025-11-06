@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using interfaces.movebehaviours;
+using items;
 using rooms;
 
 namespace maps;
@@ -20,8 +21,21 @@ public class Map
     }
 
     //Methods
-    public void AddRoom(String coord,Room room)
+
+    public Room CreateRoom(string name, List<Item> items, string info, Dictionary<String, Room> SurroundingRooms)
+    {
+      return new RoomBuilder()
+        .addName(name)
+        .addItems(items)
+        .addInformation(info)
+        .addSurroundingRooms(SurroundingRooms)
+        .Build();
+    }
+    
+    public void AddRoom(String coord, Room room)
     {
         Rooms.Add(coord, room);
     }
+    
+
 }

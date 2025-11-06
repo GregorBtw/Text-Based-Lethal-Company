@@ -5,31 +5,13 @@ using rooms;
 
 public class RoomBuilder
 {
-    private String Name;
+    public string Name;
 
-    public Item[] Items { get; set; }
+    public List<Item> Items { get; set; }
 
     public String Information { get; set; }
 
     public Dictionary<String, Room> SurroundingRooms { get; set; }
-
-    public String name
-    {
-        get { return Name; }
-        set{
-            if (value.Length < 1){
-                Console.WriteLine("Please enter a valid username.");
-                return;
-            }
-            else if (value.Length > 15){
-                Console.WriteLine("Username too long, MUST be less than 15 characters.");
-                return;
-            }
-            else{
-                Name = value;
-            }
-        }
-    }
 
     //Constructors
 
@@ -38,7 +20,7 @@ public class RoomBuilder
         this.Name = name;
         return this;
     }
-    public RoomBuilder addItems(Item[] items)
+    public RoomBuilder addItems(List<Item> items) 
     {
         this.Items = items;
         return this;
