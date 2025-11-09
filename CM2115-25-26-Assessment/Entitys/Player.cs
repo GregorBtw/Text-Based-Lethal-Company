@@ -2,6 +2,8 @@ using System;
 using entitys;
 using inventory;
 using rooms;
+using maps;
+
 
 namespace entitys.players;
 
@@ -9,19 +11,34 @@ namespace entitys.players;
 public class Player : Entity
 {
 
+
+     /*Moon.Ship.Rooms["0,0"]*/
+
+
     //Attributes
+    private static Player instance = null;
 
     public Inventory Inventory { get; set; }
 
+
     //Constructor
-    public Player(String name, int hp, Room currentRoom, Inventory inventory) : base(name, hp, currentRoom)
+    private Player(String name, int hp, Room currentRoom, Inventory inventory) : base(name, hp, currentRoom)
     {
-        this.Inventory = new Inventory();
+        this.Inventory = inventory;
     }
 
+
     //Methods
-    public void Initialise()
+    public static Player Initialise(Room room)
     {
-        //Initialise player attributes
+        Console.WriteLine("Please enter a username!: ");
+        var Username = Console.ReadLine();
+
+        if (instance == null)
+        {
+            instance = new Player(Username, 100, room, new Inventory());
+        }
+
+        return instance;
     }
 }
