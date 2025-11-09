@@ -9,9 +9,9 @@ public class Entity
 
     //Attributes
 
-    private String Name;
+    public String Name;
 
-    private int HP;
+    public int HP;
 
     public Room CurrentRoom;
 

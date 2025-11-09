@@ -31,11 +31,12 @@ public class Map
         .addSurroundingRooms(SurroundingRooms)
         .Build();
     }
-    
+
     public void AddRoom(String coord, Room room)
     {
         Rooms.Add(coord, room);
     }
+    
     
 
 }

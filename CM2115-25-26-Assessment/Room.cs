@@ -25,17 +25,13 @@ public class Room
         this.SurroundingRooms = Builder.SurroundingRooms;
     }
 
-    
-
-
-
     //Methods
 
     public void DisplayScrap()
     {
         //Display the items in the room to the player
     }
-    public void DisplayRooInfo()
+    public void DisplayRoomInfo()
     {
         //Display the room information to the player
     }
