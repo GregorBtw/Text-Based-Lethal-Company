@@ -10,11 +10,6 @@ namespace entitys.players;
 
 public class Player : Entity
 {
-
-
-     /*Moon.Ship.Rooms["0,0"]*/
-
-
     //Attributes
     private static Player instance = null;
 
@@ -31,8 +26,16 @@ public class Player : Entity
     //Methods
     public static Player Initialise(Room room)
     {
-        Console.WriteLine("Please enter a username!: ");
+        Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");
         var Username = Console.ReadLine();
+
+        while(Username.Length<=3||Username.Length>=15)
+        {
+            Console.Clear();
+            Console.WriteLine("Username must be longer than 3 characters, and shorter than 15");
+            Console.WriteLine("Please enter a username!: ");
+            Username = Console.ReadLine();
+        }
 
         if (instance == null)
         {
