@@ -3,6 +3,7 @@ using entitys;
 using inventory;
 using rooms;
 using maps;
+using System.Reflection.Metadata;
 
 
 namespace entitys.players;
@@ -24,7 +25,7 @@ public class Player : Entity
 
 
     //Methods
-    public static Player Initialise(Room room)
+    public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");
         var Username = Console.ReadLine();
@@ -39,9 +40,33 @@ public class Player : Entity
 
         if (instance == null)
         {
-            instance = new Player(Username, 100, room, new Inventory());
+            instance = new Player(Username, 100, startRoom, new Inventory());
         }
 
         return instance;
+    }
+
+    public void Move()
+    {
+        Console.WriteLine($"Where would you like to move {instance.Name}?");
+
+        Console.WriteLine("-------------------------------");
+        foreach (var kvp in instance.CurrentRoom.SurroundingRooms)
+        {
+            Console.WriteLine($"{kvp.Key} -> {kvp.Value.Name}");
+        }
+        Console.WriteLine("-------------------------------");
+        var Result = Console.ReadLine();
+
+        if (instance.CurrentRoom.SurroundingRooms.TryGetValue(Result, out Room nextRoom))
+        {
+            instance.CurrentRoom = nextRoom; // move the player
+            Console.Clear();
+            Console.WriteLine($"You moved to {nextRoom.Name}.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid choice, please try again.");
+        }
     }
 }

@@ -18,31 +18,9 @@ public class Program
         Player User = Player.Initialise(Moon.Ship.Rooms["0,0"]);
 
         //Movement
-      
         while (User.HP > 0)
         {
-            Console.WriteLine($"{User.Name} Where would you like to move?");
-
-            foreach (var kvp in User.CurrentRoom.SurroundingRooms)
-            {
-                Console.WriteLine(kvp.Key);
-            }
-            var Result = Console.ReadLine();
-
-            Console.Clear();
-
-            if (User.CurrentRoom.SurroundingRooms.TryGetValue(Result, out Room nextRoom))
-            {
-                User.CurrentRoom = nextRoom; // move the player
-                Console.WriteLine($"You moved to {nextRoom.Name}.");
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice, please try again.");
-            }
-        
-
-
+           User.Move();
         }
    
     }
