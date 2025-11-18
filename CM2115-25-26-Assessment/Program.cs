@@ -5,6 +5,7 @@ using behaviours.movebehaviours;
 using entitys.players;
 using rooms;
 using Moons;
+using Game_Data;
 
 public class Program
 {
@@ -18,7 +19,7 @@ public class Program
         Player User = Player.Initialise(Moon.Ship.Rooms["0,0"]);
 
         //Movement
-        while (User.HP > 0)
+        while (User.isPlaying)
         {
            User.Move();
         }
