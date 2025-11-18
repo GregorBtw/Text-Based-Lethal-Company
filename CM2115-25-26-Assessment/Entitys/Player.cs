@@ -14,6 +14,14 @@ public class Player : Entity
     //Attributes
     private static Player instance = null;
 
+    public bool isPlaying = true;
+
+    public int EnemysKilled = 0;
+
+    public int PuzzlesSolved = 0;
+
+    public int ScrapValueCollected = 0;
+
     public Inventory Inventory { get; set; }
 
 
@@ -51,9 +59,9 @@ public class Player : Entity
         Console.WriteLine($"Where would you like to move {instance.Name}?");
 
         Console.WriteLine("-------------------------------");
-        foreach (var kvp in instance.CurrentRoom.SurroundingRooms)
+        foreach (var room in instance.CurrentRoom.SurroundingRooms)
         {
-            Console.WriteLine($"{kvp.Key} -> {kvp.Value.Name}");
+            Console.WriteLine($"{room.Key} -> {room.Value.Name}");
         }
         Console.WriteLine("-------------------------------");
         var Result = Console.ReadLine();
@@ -68,5 +76,25 @@ public class Player : Entity
         {
             Console.WriteLine("Invalid choice, please try again.");
         }
+    }
+
+    public void DisplayPuzzlesSolved()
+    {
+        Console.WriteLine(PuzzlesSolved);
+    }
+
+    public void DisplayScrapValueCollected()
+    {
+        Console.WriteLine(ScrapValueCollected);        
+    }
+
+    public void DisplayInventoryItems()
+    {
+        Console.WriteLine(Inventory);       
+    }
+
+    public void DisplayEnemysKilled()
+    {
+        Console.WriteLine(EnemysKilled);       
     }
 }
