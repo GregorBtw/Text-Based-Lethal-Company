@@ -4,6 +4,8 @@ using items;
 using maps;
 using behaviours.itembehaviours;
 using roomBuilder;
+using entitys.Creatures;
+using behaviours.attackbehaviours;
 
 
 
@@ -11,22 +13,101 @@ public class Assurance : IMoonBehaviour
 {
     public void CreateMoon(Map Ship, Map WareHouse)
     {
-            //Initialise Items
-            Item Cog = new Item("Cog", 45, new ValueItem());
+
+           //Initialise Value Items
+           Item Cog = new Item("Cog", 45, new ValueItem());
+           Item LargeAxle = new Item("Large Axle", 90, new ValueItem());
+           Item EnginePart = new Item("Engine Part", 85, new ValueItem());
+           Item MetalSheet = new Item("Bent Metal Sheet", 35, new ValueItem());
+
+           //Initialise Tool Items
+           Item Lockpicker = new Item("Lockpicker", 90, new ToolItem());
+
+           //Initialise Damage Items
+           Item SignPost = new Item("Stop Sign", 90, new DamageItem(new Strike()));
+           Item Pipe = new Item("Metal Pipe", 55, new DamageItem(new HeavyStrike()));
+           Item ShotGun = new Item("Shot Gun", 100, new DamageItem(new Shoot()));
+
+
+            //Initialise Enemys
+            Creature Thumper = new Creature("Thumper", 60, new HeavyStrike());
+            Creature Bracken = new Creature("Bracken", 120, new InstantKill());
+            Creature BunkerSpider = new Creature("Bunker Spider", 80, new Strike());
+            Creature Nutcracker = new Creature("Nutcracker", 100, new Shoot());
+
 
             //Initially Create Rooms
-            Ship.AddRoom("0,0", new RoomBuilder().AddMainData("Engine Room", new List<Item> { Cog }, "The heart of the ship hums quietly. You can smell oil and steam.").Build());
-            Ship.AddRoom("0,1", new RoomBuilder().AddMainData("Crew Quarters", new List<Item> { Cog }, "Bunks line the walls. Someone left a half-eaten ration on the table.").Build());
 
-            WareHouse.AddRoom("-1,2", new RoomBuilder().AddMainData("Storage A", new List<Item> { Cog }, "Crates are stacked high, covered in dust and cobwebs.").Build());
-            WareHouse.AddRoom("0,2", new RoomBuilder().AddMainData("Loading Dock", new List<Item> { Cog }, "A loading crane looms above the platform. The air smells of metal.").Build());
-            WareHouse.AddRoom("1,2", new RoomBuilder().AddMainData("Supply Office", new List<Item> { Cog }, "A cluttered desk with scattered papers and a broken lamp.").Build());
-            WareHouse.AddRoom("-1,3", new RoomBuilder().AddMainData("Observation Room", new List<Item> { Cog }, "Large glass panels overlook the docking area below.").Build());
-            WareHouse.AddRoom("0,3", new RoomBuilder().AddMainData("Maintenance Bay", new List<Item> { Cog }, "A place for fixing equipment. Tools hang neatly on the wall.").Build());
-            WareHouse.AddRoom("1,3", new RoomBuilder().AddMainData("Security Room", new List<Item> { Cog }, "Monitors flicker, showing camera feeds from every corner of the warehouse.").Build());
-            WareHouse.AddRoom("-1,4", new RoomBuilder().AddMainData("Lower Storage", new List<Item> { Cog }, "The dimly lit lower section of the warehouse. Smells faintly of oil.").Build());
-            WareHouse.AddRoom("0,4", new RoomBuilder().AddMainData("Lower Corridor", new List<Item> { Cog }, "A narrow corridor with flickering lights overhead.").Build());
-            WareHouse.AddRoom("1,4", new RoomBuilder().AddMainData("Lower Office", new List<Item> { Cog }, "Dusty desks and scattered blueprints cover the room.").Build());
+            //Ship
+
+            Ship.AddRoom("0,0", new RoomBuilder().AddMainData(
+                "Ship Engine Compartment",
+                new List<Item> {  },
+                "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
+            ).Build());
+
+            Ship.AddRoom("0,1", new RoomBuilder().AddMainData(
+                "Shuttle Entry Bay",
+                new List<Item> {  },
+                "Metal benches and storage racks sit bolted to the floor. The exit ramp leads into the facility."
+            ).Build());
+
+
+            //WareHouse
+
+            WareHouse.AddRoom("-1,2", new RoomBuilder().AddMainData(
+                "Storage Room A",
+                new List<Item> { Cog, Pipe },
+                "Stacks of old shipping crates rest under layers of dust. Something has disturbed the cobwebs recently."
+            ).Build());
+
+            WareHouse.AddRoom("0,2", new RoomBuilder().AddMainData(
+                "Main Loading Dock",
+                new List<Item> { LargeAxle },
+                "Large cargo doors dominate the room. Forklifts sit abandoned, and scattered scrap covers the floor."
+            ).Build());
+
+            WareHouse.AddRoom("1,2", new RoomBuilder().AddMainData(
+                "Logistics Office",
+                new List<Item> { SignPost },
+                "Clipboards, terminals, and scattered papers clutter the desks. The smell of mold lingers."
+            ).AddEnemy(Thumper).Build());
+
+            WareHouse.AddRoom("-1,3", new RoomBuilder().AddMainData(
+                "Observation Control Room",
+                new List<Item> { LargeAxle, ShotGun},
+                "Dust-covered windows overlook the warehouse floor. A chair lies knocked over beside the monitors."
+            ).Build());
+
+            WareHouse.AddRoom("0,3", new RoomBuilder().AddMainData(
+                "Maintenance Workshop",
+                new List<Item> { EnginePart },
+                "Broken tools and abandoned machinery fill the benches. Deep scratches line the metal cabinets."
+            ).AddEnemy(Bracken).Build());
+
+            WareHouse.AddRoom("1,3", new RoomBuilder().AddMainData(
+                "Security Monitoring Room",
+                new List<Item> { Lockpicker },
+                "Old security screens flicker with static. Lockers stand open, their contents missing."
+            ).Build());
+
+            WareHouse.AddRoom("-1,4", new RoomBuilder().AddMainData(
+                "Lower Cargo Storage",
+                new List<Item> { EnginePart, Pipe},
+                "Dim emergency lights cast long shadows across stacked crates. The air feels cold and still."
+            ).AddEnemy(BunkerSpider).Build());
+
+            WareHouse.AddRoom("0,4", new RoomBuilder().AddMainData(
+                "Lower Access Hallway",
+                new List<Item> { MetalSheet, Lockpicker},
+                "A narrow concrete hallway with peeling paint. Every step echoes louder than it should."
+            ).Build());
+
+            WareHouse.AddRoom("1,4", new RoomBuilder().AddMainData(
+                "Lower Management Office",
+                new List<Item> {  },
+                "Old documents lie scattered across the floor. A broken desk lamp flickers intermittently."
+            ).AddEnemy(Nutcracker).Build());
 
             //Add surrounding rooms so they are visible
             Ship.Rooms["0,0"].SurroundingRooms = new Dictionary<string, Room>{
@@ -35,7 +116,7 @@ public class Assurance : IMoonBehaviour
 
             Ship.Rooms["0,1"].SurroundingRooms = new Dictionary<string, Room>{
                 { "Back", Ship.Rooms["0,0"] },       // Crew Quarters -> Engine Room
-                { "Right", WareHouse.Rooms["0,2"] }  // Crew Quarters -> Loading Dock
+                { "Forward", WareHouse.Rooms["0,2"] }  // Crew Quarters -> Loading Dock
             };
 
             WareHouse.Rooms["-1,2"].SurroundingRooms = new Dictionary<string, Room>{

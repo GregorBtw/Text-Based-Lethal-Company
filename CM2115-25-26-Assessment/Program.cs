@@ -25,11 +25,6 @@ public class Program
         while (User.isPlaying)
         {
            User.DisplayCurrentRoomInformation();
-           Console.WriteLine("Please enter a value to update the health bar: ");
-           var input = Console.ReadLine();
-           var IntInput = int.Parse(input);
-           User.SetHp(IntInput);
-
            User.Move();
         }
    
