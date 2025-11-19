@@ -6,6 +6,9 @@ using maps;
 using System.Reflection.Metadata;
 
 
+using interfaces.Observer;
+
+
 namespace entitys.players;
 
 
@@ -13,6 +16,8 @@ public class Player : Entity
 {
     //Attributes
     private static Player instance = null;
+
+    public List<IObserver> Observers = new List<IObserver>();
 
     public bool isPlaying = true;
 
@@ -33,6 +38,24 @@ public class Player : Entity
 
 
     //Methods
+
+    public void AttachObserver(IObserver observer)
+    {
+        Observers.Add(observer);
+    }
+
+    public void DetachObserver(IObserver observer)
+    {
+        Observers.Remove(observer);
+    }
+
+    public void SetHp(int value)
+    {
+        HP = value;
+        foreach (var observer in Observers)
+            observer.Update(HP);
+    }
+
     public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");

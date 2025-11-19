@@ -6,6 +6,7 @@ using entitys.players;
 using rooms;
 using Moons;
 using Game_Data;
+using Observers.HealthBar;
 
 public class Program
 {
@@ -17,11 +18,18 @@ public class Program
 
         //Initialise Player settings
         Player User = Player.Initialise(Moon.Ship.Rooms["0,0"]);
+        HealthBar HealthBar = new HealthBar();
+        User.AttachObserver(HealthBar);
 
         //Movement
         while (User.isPlaying)
         {
            User.DisplayCurrentRoomInformation();
+           Console.WriteLine("Please enter a value to update the health bar: ");
+           var input = Console.ReadLine();
+           var IntInput = int.Parse(input);
+           User.SetHp(IntInput);
+
            User.Move();
         }
    
