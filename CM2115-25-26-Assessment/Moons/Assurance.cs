@@ -3,6 +3,7 @@ using rooms;
 using items;
 using maps;
 using behaviours.itembehaviours;
+using roomBuilder;
 
 
 
@@ -14,18 +15,18 @@ public class Assurance : IMoonBehaviour
             Item Cog = new Item("Cog", 45, new ValueItem());
 
             //Initially Create Rooms
-            Ship.AddRoom("0,0", Ship.CreateRoom("Engine Room", new List<Item> { Cog }, "The heart of the ship hums quietly. You can smell oil and steam.", null));
-            Ship.AddRoom("0,1", Ship.CreateRoom("Crew Quarters", new List<Item> { Cog }, "Bunks line the walls. Someone left a half-eaten ration on the table.", null));
+            Ship.AddRoom("0,0", new RoomBuilder().AddMainData("Engine Room", new List<Item> { Cog }, "The heart of the ship hums quietly. You can smell oil and steam.").Build());
+            Ship.AddRoom("0,1", new RoomBuilder().AddMainData("Crew Quarters", new List<Item> { Cog }, "Bunks line the walls. Someone left a half-eaten ration on the table.").Build());
 
-            WareHouse.AddRoom("-1,2", WareHouse.CreateRoom("Storage A", new List<Item> { Cog }, "Crates are stacked high, covered in dust and cobwebs.", null));
-            WareHouse.AddRoom("0,2", WareHouse.CreateRoom("Loading Dock", new List<Item> { Cog }, "A loading crane looms above the platform. The air smells of metal.", null));
-            WareHouse.AddRoom("1,2", WareHouse.CreateRoom("Supply Office", new List<Item> { Cog }, "A cluttered desk with scattered papers and a broken lamp.", null));
-            WareHouse.AddRoom("-1,3", WareHouse.CreateRoom("Observation Room", new List<Item> { Cog }, "Large glass panels overlook the docking area below.", null));
-            WareHouse.AddRoom("0,3", WareHouse.CreateRoom("Maintenance Bay", new List<Item> { Cog }, "A place for fixing equipment. Tools hang neatly on the wall.", null));
-            WareHouse.AddRoom("1,3", WareHouse.CreateRoom("Security Room", new List<Item> { Cog }, "Monitors flicker, showing camera feeds from every corner of the warehouse.", null));
-            WareHouse.AddRoom("-1,4", WareHouse.CreateRoom("Lower Storage", new List<Item> { Cog }, "The dimly lit lower section of the warehouse. Smells faintly of oil.", null));
-            WareHouse.AddRoom("0,4", WareHouse.CreateRoom("Lower Corridor", new List<Item> { Cog }, "A narrow corridor with flickering lights overhead.", null));
-            WareHouse.AddRoom("1,4", WareHouse.CreateRoom("Lower Office", new List<Item> { Cog }, "Dusty desks and scattered blueprints cover the room.", null));
+            WareHouse.AddRoom("-1,2", new RoomBuilder().AddMainData("Storage A", new List<Item> { Cog }, "Crates are stacked high, covered in dust and cobwebs.").Build());
+            WareHouse.AddRoom("0,2", new RoomBuilder().AddMainData("Loading Dock", new List<Item> { Cog }, "A loading crane looms above the platform. The air smells of metal.").Build());
+            WareHouse.AddRoom("1,2", new RoomBuilder().AddMainData("Supply Office", new List<Item> { Cog }, "A cluttered desk with scattered papers and a broken lamp.").Build());
+            WareHouse.AddRoom("-1,3", new RoomBuilder().AddMainData("Observation Room", new List<Item> { Cog }, "Large glass panels overlook the docking area below.").Build());
+            WareHouse.AddRoom("0,3", new RoomBuilder().AddMainData("Maintenance Bay", new List<Item> { Cog }, "A place for fixing equipment. Tools hang neatly on the wall.").Build());
+            WareHouse.AddRoom("1,3", new RoomBuilder().AddMainData("Security Room", new List<Item> { Cog }, "Monitors flicker, showing camera feeds from every corner of the warehouse.").Build());
+            WareHouse.AddRoom("-1,4", new RoomBuilder().AddMainData("Lower Storage", new List<Item> { Cog }, "The dimly lit lower section of the warehouse. Smells faintly of oil.").Build());
+            WareHouse.AddRoom("0,4", new RoomBuilder().AddMainData("Lower Corridor", new List<Item> { Cog }, "A narrow corridor with flickering lights overhead.").Build());
+            WareHouse.AddRoom("1,4", new RoomBuilder().AddMainData("Lower Office", new List<Item> { Cog }, "Dusty desks and scattered blueprints cover the room.").Build());
 
             //Add surrounding rooms so they are visible
             Ship.Rooms["0,0"].SurroundingRooms = new Dictionary<string, Room>{

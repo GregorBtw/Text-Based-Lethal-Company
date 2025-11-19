@@ -1,5 +1,8 @@
 using interfaces.room;
 using items;
+using entitys.Creatures;
+using puzzles;
+using roomBuilder;
 
 namespace rooms;
 
@@ -15,6 +18,10 @@ public class Room
 
     public Dictionary<String, Room> SurroundingRooms;
 
+    public Creature Enemy;
+
+    public Puzzle Puzzle;
+
     //Constructor
 
     public Room(RoomBuilder Builder)
@@ -23,6 +30,8 @@ public class Room
         this.Items = Builder.Items;
         this.Information = Builder.Information;
         this.SurroundingRooms = Builder.SurroundingRooms;
+        this.Enemy = Builder.Enemy;
+        this.Puzzle = Builder.Puzzle;
     }
 
     //Methods

@@ -2,7 +2,11 @@ using System.Diagnostics.Contracts;
 using System.Dynamic;
 using items;
 using rooms;
+using entitys;
+using entitys.Creatures;
+using puzzles;
 
+namespace roomBuilder;
 public class RoomBuilder
 {
     public string Name;
@@ -13,26 +17,35 @@ public class RoomBuilder
 
     public Dictionary<String, Room> SurroundingRooms { get; set; }
 
+    public Creature Enemy { get; set; }
+
+    public Puzzle Puzzle { get; set; }
+
     //Constructors
 
-    public RoomBuilder addName(string name)
+    public RoomBuilder AddMainData(string name, List<Item> items, string information)
     {
         this.Name = name;
-        return this;
-    }
-    public RoomBuilder addItems(List<Item> items) 
-    {
         this.Items = items;
-        return this;
-    }
-    public RoomBuilder addInformation(string information)
-    {
         this.Information = information;
         return this;
     }
-    public RoomBuilder addSurroundingRooms(Dictionary<String, Room> surroundingRooms)
+
+    public RoomBuilder AddSurroundingRooms(Dictionary<String, Room> surroundingRooms)
     {
         this.SurroundingRooms = surroundingRooms;
+        return this;
+    }
+
+    public RoomBuilder AddEnemy(Creature enemy)
+    {
+        this.Enemy = enemy;
+        return this;
+    }
+
+    public RoomBuilder AddPuzzle(Puzzle puzzle)
+    {
+        this.Puzzle = puzzle;
         return this;
     }
     

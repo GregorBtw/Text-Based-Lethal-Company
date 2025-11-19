@@ -13,7 +13,7 @@ public class Creature : Entity
     public IAttackBehaviour AttackBehaviour;
 
     //Constructor
-    public Creature(String name, int hp, Room currentRoom, IAttackBehaviour attackBehaviour) : base(name, hp, currentRoom)
+    public Creature(String name, int hp, IAttackBehaviour attackBehaviour) : base(name, hp)
     {
         this.AttackBehaviour = attackBehaviour;
     }
