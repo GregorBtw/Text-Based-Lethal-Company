@@ -13,14 +13,11 @@ public class Entity
 
     public int HP;
 
-    public Room CurrentRoom;
-
     //Constructor
-    public Entity(String name, int hp, Room currentRoom)
+    public Entity(String name, int hp)
     {
         this.Name = name;
         this.HP = hp;
-        this.CurrentRoom = currentRoom;
     }
 
     //Methods

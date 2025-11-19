@@ -29,11 +29,14 @@ public class Player : Entity
 
     public Inventory Inventory { get; set; }
 
+    public Room CurrentRoom { get; set; }
+
 
     //Constructor
-    private Player(String name, int hp, Room currentRoom, Inventory inventory) : base(name, hp, currentRoom)
+    private Player(String name, int hp, Room currentRoom, Inventory inventory) : base(name, hp)
     {
         this.Inventory = inventory;
+        this.CurrentRoom = currentRoom;
     }
 
 
