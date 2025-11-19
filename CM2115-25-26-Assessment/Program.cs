@@ -24,7 +24,10 @@ public class Program
         //Movement
         while (User.isPlaying)
         {
+           User.SetHp(User.HP);
+           HealthBar.DisplayHealthBar();
            User.DisplayCurrentRoomInformation();
+
            User.Move();
         }
    

@@ -4,24 +4,39 @@ namespace Observers.HealthBar;
 
 public class HealthBar : IObserver
 {
+
+    //attributes
+
+    public string healthBar;
+
+
+    //Methods
+
     public void Update(int hp)
     {
         decimal roundedPercentage = Math.Ceiling((decimal)hp / 5);
 
-        var healthbar = "";
+        healthBar = "";
 
         for(var i = 0; i < roundedPercentage; i++)
         {
-            healthbar+="█";
+            healthBar+="█";
         }
-        if (healthbar.Length < 20)
+        if (healthBar.Length < 20)
         {
             for(var i=0;i < (20 - roundedPercentage); i++)
             {
-                healthbar+="-";
+                healthBar+="-";
             }
         }
 
-        Console.WriteLine($"[{healthbar}] {hp}%");
+        healthBar = $"[{healthBar}] {hp}%HP";
+
+    }
+
+    public void DisplayHealthBar()
+    {
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine(healthBar);
     }
 }
