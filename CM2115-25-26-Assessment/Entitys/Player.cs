@@ -68,6 +68,17 @@ public class Player : Entity
 
         if (instance.CurrentRoom.SurroundingRooms.TryGetValue(Result, out Room nextRoom))
         {
+            Console.Clear();
+
+            var Loading = "Loading";
+
+            for(var i = 0; i < 4; i++)
+            {
+                Console.WriteLine(Loading);
+                Loading+=".";
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
             instance.CurrentRoom = nextRoom; // move the player
             Console.Clear();
             Console.WriteLine($"You moved to {nextRoom.Name}.");
@@ -78,6 +89,13 @@ public class Player : Entity
         }
     }
 
+    public void DisplayCurrentRoomInformation()
+    {
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Room Information:\n\n{CurrentRoom.Information}");
+            Console.WriteLine("-------------------------------");
+    }
+ 
     public void DisplayPuzzlesSolved()
     {
         Console.WriteLine(PuzzlesSolved);

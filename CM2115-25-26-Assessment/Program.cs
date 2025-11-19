@@ -21,6 +21,7 @@ public class Program
         //Movement
         while (User.isPlaying)
         {
+           User.DisplayCurrentRoomInformation();
            User.Move();
         }
    
