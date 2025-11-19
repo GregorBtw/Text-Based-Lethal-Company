@@ -102,7 +102,7 @@ public class Player : Entity
             {
                 Console.WriteLine(Loading);
                 Loading+=".";
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 Console.Clear();
             }
             instance.CurrentRoom = nextRoom; // move the player
@@ -118,7 +118,23 @@ public class Player : Entity
     public void DisplayCurrentRoomInformation()
     {
             Console.WriteLine("-------------------------------");
+            Console.WriteLine($"Room Name:\n\n{CurrentRoom.Name}");
+            Console.WriteLine("-------------------------------");
             Console.WriteLine($"Room Information:\n\n{CurrentRoom.Information}");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("Items:\n\n");
+            /*
+            if (CurrentRoom.Items==null)
+            {
+                Console.WriteLine("No Items!");
+            }else if (CurrentRoom.Items != null)
+            {
+               foreach(var item in CurrentRoom.Items)
+                {
+                    Console.WriteLine(item);
+                }             
+            }
+            */
             Console.WriteLine("-------------------------------");
     }
  
