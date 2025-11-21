@@ -15,25 +15,26 @@ public class Assurance : IMoonBehaviour
     {
 
            //Initialise Value Items
-           Item Cog = new Item("Cog", 45, new ValueItem());
-           Item LargeAxle = new Item("Large Axle", 90, new ValueItem());
-           Item EnginePart = new Item("Engine Part", 85, new ValueItem());
-           Item MetalSheet = new Item("Bent Metal Sheet", 35, new ValueItem());
+           //Initialise Value Items
+           Item Cog = new Item("cog", 45, new ValueItem(), "A solid, rust-flecked gear used in old machinery. Still sturdy enough to be useful in repairs or crafting.");
+           Item LargeAxle = new Item("large axle", 90, new ValueItem(), "A thick metal axle, heavy and worn. Essential for restoring larger mechanical systems.");
+           Item EnginePart = new Item("engine part", 85, new ValueItem(), "A dense chunk of engine hardware—wires, plates, and connectors fused together. Looks critical for powering something important.");
+           Item MetalSheet = new Item("bent metal sheet", 35, new ValueItem(), "A warped metal panel pried off of a ruined structure. Not pretty, but useful for patching or makeshift construction.");
 
            //Initialise Tool Items
-           Item Lockpicker = new Item("Lockpicker", 90, new ToolItem());
+           Item Lockpicker = new Item("lockpicker", 90, new ToolItem(), "A slim metal toolkit for bypassing old locks. Fragile, but invaluable when a door stands between you and survival.");
 
            //Initialise Damage Items
-           Item SignPost = new Item("Stop Sign", 90, new DamageItem(new Strike()));
-           Item Pipe = new Item("Metal Pipe", 55, new DamageItem(new HeavyStrike()));
-           Item ShotGun = new Item("Shot Gun", 100, new DamageItem(new Shoot()));
+           Item SignPost = new Item("stop sign", 90, new DamageItem(new Strike()), "A battered stop sign on a broken pole. Heavy, wide, and surprisingly effective when swung with both hands.");
+           Item Pipe = new Item("metal pipe", 55, new DamageItem(new HeavyStrike()), "A section of steel pipe, cold and dense. Delivers brutal, crushing strikes.");
+           Item ShotGun = new Item("shot gun", 100, new DamageItem(new Shoot()), "An old, sawed-off shotgun. Loud, powerful, and devastating at close range.");
 
+           //Initialise Enemys
+           Creature Thumper = new Creature("thumper", 60, new HeavyStrike(), "A hulking creature with distorted limbs that slam into the ground with bone-cracking force. Slow but terrifyingly strong.");
+           Creature Bracken = new Creature("bracken", 120, new InstantKill(), "A tall, silent humanoid shape that stalks in the dark. Moves unnaturally fast and kills without hesitation.");
+           Creature BunkerSpider = new Creature("bunker spider", 80, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
+           Creature Nutcracker = new Creature("nutcracker", 100, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
 
-            //Initialise Enemys
-            Creature Thumper = new Creature("Thumper", 60, new HeavyStrike());
-            Creature Bracken = new Creature("Bracken", 120, new InstantKill());
-            Creature BunkerSpider = new Creature("Bunker Spider", 80, new Strike());
-            Creature Nutcracker = new Creature("Nutcracker", 100, new Shoot());
 
 
             //Initially Create Rooms
@@ -41,13 +42,13 @@ public class Assurance : IMoonBehaviour
             //Ship
 
             Ship.AddRoom("0,0", new RoomBuilder().AddMainData(
-                "Ship Engine Compartment",
+                "Ship Control Compartment",
                 new List<Item> {  },
                 "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
             ).Build());
 
             Ship.AddRoom("0,1", new RoomBuilder().AddMainData(
-                "Shuttle Entry Bay",
+                "Ship Entrance",
                 new List<Item> {  },
                 "Metal benches and storage racks sit bolted to the floor. The exit ramp leads into the facility."
             ).Build());
@@ -62,7 +63,7 @@ public class Assurance : IMoonBehaviour
             ).Build());
 
             WareHouse.AddRoom("0,2", new RoomBuilder().AddMainData(
-                "Main Loading Dock",
+                "Main WareHouse Entrance",
                 new List<Item> { LargeAxle },
                 "Large cargo doors dominate the room. Forklifts sit abandoned, and scattered scrap covers the floor."
             ).Build());
