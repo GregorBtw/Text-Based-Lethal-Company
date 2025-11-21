@@ -122,19 +122,17 @@ public class Player : Entity
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Room Information:\n\n{CurrentRoom.Information}");
             Console.WriteLine("-------------------------------");
-            Console.WriteLine("Items:\n\n");
-            /*
-            if (CurrentRoom.Items==null)
+            Console.WriteLine("Items:\n");
+            if (CurrentRoom.Items.Count==0)
             {
                 Console.WriteLine("No Items!");
-            }else if (CurrentRoom.Items != null)
+            }else if (CurrentRoom.Items.Count>0)
             {
-               foreach(var item in CurrentRoom.Items)
+               for(var i=0;i<CurrentRoom.Items.Count;i++)
                 {
-                    Console.WriteLine(item);
+                    Console.WriteLine($"{CurrentRoom.Items[i].Name} - {CurrentRoom.Items[i].ItemBehaviour}");
                 }             
             }
-            */
             Console.WriteLine("-------------------------------");
     }
  
