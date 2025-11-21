@@ -80,9 +80,9 @@ public class Player : Entity
         return instance;
     }
 
-    public void Move()
+    public static void Move()
     {
-        Console.WriteLine($"Where would you like to move {instance.Name}?");
+        Console.WriteLine($"\nWhere would you like to move {instance.Name}?");
 
         Console.WriteLine("-------------------------------");
         foreach (var room in instance.CurrentRoom.SurroundingRooms)
@@ -115,25 +115,52 @@ public class Player : Entity
         }
     }
 
-    public void DisplayCurrentRoomInformation()
+    public void CompleteAction()
     {
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Room Name:\n\n{CurrentRoom.Name}");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Room Information:\n\n{CurrentRoom.Information}");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine("Items:\n");
-            if (CurrentRoom.Items.Count==0)
+        var CompletingActions = true;
+
+        while (CompletingActions)
+        {
+            Console.Clear();
+            CurrentRoom.DisplayCurrentRoomInformation();
+            Console.WriteLine($"What would you like to do next {instance.Name}?\n");
+            Thread.Sleep(500);
+
+            if (CurrentRoom.Items.Count > 0)
             {
-                Console.WriteLine("No Items!");
-            }else if (CurrentRoom.Items.Count>0)
-            {
-               for(var i=0;i<CurrentRoom.Items.Count;i++)
-                {
-                    Console.WriteLine($"{CurrentRoom.Items[i].Name} - {CurrentRoom.Items[i].ItemBehaviour}");
-                }             
+                Console.WriteLine("• Equip an item in this room - Press [E]");
             }
-            Console.WriteLine("-------------------------------");
+            Console.WriteLine("• Move to another room - Press [M]");
+            if(Inventory.Items.Count > 0)
+            {
+                Console.WriteLine("• Drop an item in this room - Press [D]");
+            }
+            String RawInput = Console.ReadLine();
+            String Input = RawInput.Trim().ToLower();
+
+            if (Input == "e")
+            {
+                CurrentRoom.PickUpItem(Inventory);
+            }
+            else if(Input == "m")
+            {
+                CompletingActions = false;
+                Move();
+            }
+            else if(Input == "d")
+            {
+                CurrentRoom.DropItem(Inventory);
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid input for an action");
+                Thread.Sleep(1000);
+            }
+
+
+
+        }
+
     }
  
     public void DisplayPuzzlesSolved()

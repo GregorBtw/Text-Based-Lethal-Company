@@ -10,11 +10,14 @@ public class Creature : Entity
 
     //Attributes
 
+    public String Description;
+
     public IAttackBehaviour AttackBehaviour;
 
     //Constructor
-    public Creature(String name, int hp, IAttackBehaviour attackBehaviour) : base(name, hp)
+    public Creature(String name, int hp, IAttackBehaviour attackBehaviour, String description) : base(name, hp)
     {
         this.AttackBehaviour = attackBehaviour;
+        this.Description = description;
     }
 }

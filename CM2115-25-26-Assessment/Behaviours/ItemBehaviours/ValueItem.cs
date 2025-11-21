@@ -11,6 +11,7 @@ public class ValueItem : IItemBehaviour
     }
     public void Equip()
     {
-
+        Console.WriteLine("You picked up a valuable item!\n");
+        Console.WriteLine("Take it back to the ship and sell it to complete the quota");
     }
 }

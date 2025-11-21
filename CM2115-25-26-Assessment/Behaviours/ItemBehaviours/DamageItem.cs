@@ -23,6 +23,6 @@ public class DamageItem : IItemBehaviour
     }
     public void Equip()
     {
-
+        
     }
 }

@@ -16,6 +16,7 @@ public class ToolItem : IItemBehaviour
     }
     public void Equip()
     {
-
+        Console.WriteLine("You picked up a useful item!\n");
+        Console.WriteLine("");
     }
 }

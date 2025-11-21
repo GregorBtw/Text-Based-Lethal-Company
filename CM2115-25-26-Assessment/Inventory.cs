@@ -8,23 +8,24 @@ public class Inventory
 
     //Attributes
 
-    public Item[] Items;
+    public List<Item> Items;
 
     //Constructor
 
     public Inventory()
     {
-        this.Items = new Item[4];
+        this.Items = new List<Item>(4);
     }
 
     //Methods
 
     public void AddItem(Item item)
     {
-        //Implementation of adding item to inventory logic
+        Items.Add(item);
     }
     public void RemoveItem(Item item)
     {
-        //Implementation of removing item from inventory logic
+        Items.Remove(item);
+        Console.WriteLine($"you dropped a {item.Name}");
     }
 }

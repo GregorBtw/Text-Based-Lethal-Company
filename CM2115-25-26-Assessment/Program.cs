@@ -26,9 +26,9 @@ public class Program
         {
            User.SetHp(User.HP);
            HealthBar.DisplayHealthBar();
-           User.DisplayCurrentRoomInformation();
+           User.CompleteAction();
 
-           User.Move();
+           
         }
    
     }
