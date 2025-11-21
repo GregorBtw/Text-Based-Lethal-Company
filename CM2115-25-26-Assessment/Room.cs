@@ -54,7 +54,7 @@ public class Room
                for(var i=0;i<Items.Count;i++)
                 {
 
-                    Console.WriteLine($"{Items[i].Name} - {Items[i].Description}");
+                    Console.WriteLine($"• {Items[i].Name} - {Items[i].Description}");
                 }             
             }
             Console.WriteLine("-------------------------------");
@@ -76,6 +76,7 @@ public class Room
                 {
                     Items[i].Equip();
                     Inventory.AddItem(Items[i]);
+                    Items.Remove(Items[i]);
                     itemPickedUp=true;
                 }
                 else
@@ -93,6 +94,11 @@ public class Room
 
         while (!itemDropped)
         {
+            Console.WriteLine($"Your Inventory:\n");
+            for(var i = 0; i < Inventory.Items.Count; i++)
+            {
+                Console.WriteLine($"• {Inventory.Items[i].Name}");
+            }
             Console.WriteLine("Please type the name of the item you would like to drop: \n");
             String RawItem = Console.ReadLine();
             String Item = RawItem.ToLower();
