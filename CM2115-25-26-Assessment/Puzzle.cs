@@ -9,15 +9,12 @@ public class Puzzle
 
     public bool isSolved;
 
-    public String Answer;
-
     public IPuzzleBehaviours PuzzleBehaviour;
 
     //Constructor
-    public Puzzle(int attemptsLeft, String answer, IPuzzleBehaviours puzzleBehaviour)
+    public Puzzle(int attemptsLeft, IPuzzleBehaviours puzzleBehaviour)
     {
         this.AttemptsLeft = attemptsLeft;
-        this.Answer = answer;
         this.PuzzleBehaviour = puzzleBehaviour;
         this.isSolved = false;
     }
