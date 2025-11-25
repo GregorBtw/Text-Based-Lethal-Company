@@ -28,21 +28,21 @@ public class ChoiceBased : IPuzzleBehaviours
 
     //methods
 
-    public void PromptPuzzle()
+    public void PromptPuzzle(Player User)
     {
 
-            Console.WriteLine($"{Description} \n");
+        Console.WriteLine($"{Description} \n");
 
-            Console.WriteLine($"{Question}\n");
+        Console.WriteLine($"{Question}\n");
 
-            for(var i = 0; i < Options.Length; i++)
-            {
-                Console.WriteLine($"• {Options[i]}");
-            }
+        for(var i = 0; i < Options.Length; i++)
+        {
+            Console.WriteLine($"• {Options[i]}");
+        }
 
-            Console.WriteLine("\nPlease enter your answer: \n");
-            String rawInput = Console.ReadLine();
-            UserAnswer = rawInput.ToUpper();
+        Console.WriteLine("\nPlease enter your answer: \n");
+        String rawInput = Console.ReadLine();
+        UserAnswer = rawInput.ToUpper();
         while (UserAnswer != "A" && UserAnswer != "B" && UserAnswer != "C")
         {
             Console.WriteLine("Please enter a valid answer: \n");
@@ -50,13 +50,11 @@ public class ChoiceBased : IPuzzleBehaviours
             UserAnswer = rawInput.ToUpper();
         }
 
-    }
 
-    public void CheckAnswer(Player User)
-    {
         if (UserAnswer==Answer)
         {
             Console.WriteLine("Puzzle Complete, you pass into the room");
+            User.PuzzlesSolved+=1;
             Thread.Sleep(2000);
         
         }else if (UserAnswer!=Answer)
@@ -66,5 +64,7 @@ public class ChoiceBased : IPuzzleBehaviours
             User.SetHp(User.HP-10);
             Thread.Sleep(2000);
         }
+
     }
+
 }

@@ -43,7 +43,7 @@ public class Assurance : IMoonBehaviour
                                                               "B. To store key–value pairs for fast lookups using a unique key",
                                                               "C. To execute multiple tasks at the same time using parallel threads"], "B"));
 
-
+           Puzzle MemoryBased1 = new Puzzle(new MemoryBased("This room contains a memory based puzzle, to pass through you must repeat the sequence 8 times back to the terminal"));
 
 
             //Initially Create Rooms
@@ -54,7 +54,7 @@ public class Assurance : IMoonBehaviour
                 "Ship Control Compartment",
                 new List<Item> {  },
                 "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
-            ).Build());
+            ).AddPuzzle(MemoryBased1).Build());
 
             Ship.AddRoom("0,1", new RoomBuilder().AddMainData(
                 "Ship Entrance",

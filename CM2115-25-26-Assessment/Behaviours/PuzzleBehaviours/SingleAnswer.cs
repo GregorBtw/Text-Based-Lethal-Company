@@ -7,6 +7,7 @@ namespace behaviours.puzzlebehaviours;
 
     public class SingleAnswer : IPuzzleBehaviours
     {
+
         //Attributes
         public string Description { get; set; }
 
@@ -22,14 +23,11 @@ namespace behaviours.puzzlebehaviours;
             this.Answer = answer;
         }
 
+
         //Methods
-        public void PromptPuzzle()
+        public void PromptPuzzle(Player User)
         {
             //Prompt the puzzle to the player
         }
 
-        public void CheckAnswer(Player User)
-        {
-            //
-        }
     }

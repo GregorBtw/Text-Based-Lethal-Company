@@ -22,8 +22,8 @@ public class Puzzle
     public void AttemptPuzzle(Player User)
     {
         //Prompt the puzzle to the player
-        PuzzleBehaviour.PromptPuzzle();
-        PuzzleBehaviour.CheckAnswer(User);
+        PuzzleBehaviour.PromptPuzzle(User);
+        //PuzzleBehaviour.CheckAnswer(User);
         isSolved = true;
     }
 }

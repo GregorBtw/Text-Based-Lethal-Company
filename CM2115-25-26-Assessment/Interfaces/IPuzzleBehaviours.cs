@@ -11,6 +11,5 @@ public interface IPuzzleBehaviours
 
     //Method signature
 
-    void PromptPuzzle();
-    void CheckAnswer(Player user);
+    void PromptPuzzle(Player User);
 }
