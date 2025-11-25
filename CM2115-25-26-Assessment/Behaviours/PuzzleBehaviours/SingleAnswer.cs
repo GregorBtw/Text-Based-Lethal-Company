@@ -27,7 +27,25 @@ namespace behaviours.puzzlebehaviours;
         //Methods
         public void PromptPuzzle(Player User)
         {
-            //Prompt the puzzle to the player
+            Console.WriteLine($"{Description} \n");
+
+            Console.WriteLine($"{Question}\n");
+
+            Console.WriteLine("Please enter the answer: ");
+            String Str = Console.ReadLine();
+            String input = Str.ToLower();
+
+            if (input == Answer)
+            {
+                Console.WriteLine("Puzzle Complete, you pass into the room");
+            }else if (input != Answer)
+            {
+                Console.WriteLine($"Incorrect, the correct answer was '{Answer}'");
+                Console.WriteLine("you take 10 damage and pass through into the room");
+                User.SetHp(User.HP-10);
+                Thread.Sleep(2000);
+            }
+       
         }
 
     }

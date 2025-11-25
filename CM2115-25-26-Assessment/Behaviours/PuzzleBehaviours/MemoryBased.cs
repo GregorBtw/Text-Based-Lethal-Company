@@ -66,6 +66,10 @@ public class MemoryBased : IPuzzleBehaviours
                 {
                     Console.WriteLine("Correct");
                     PlayerSequence.Clear();
+                    if (i == 8)
+                    {
+                        Console.WriteLine("Puzzle Complete, you pass into the room");
+                    }
                 }else if(PlayerSequence != Sequence)
                 {
                     Console.WriteLine("Incorrect sequence");
