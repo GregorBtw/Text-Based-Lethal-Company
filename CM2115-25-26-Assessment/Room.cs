@@ -117,5 +117,20 @@ public class Room
             }           
         }
   
-    }                 
+    }
+
+    public void CheckForPuzzle(Player User)
+    {
+        if (Puzzle!=null)
+        {
+            if (!Puzzle.isSolved)
+            {
+                Puzzle.AttemptPuzzle(User);
+                
+            }else if (Puzzle.isSolved)
+            {
+                return;
+            }
+        }
+    }              
 }

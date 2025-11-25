@@ -25,7 +25,7 @@ public class Program
         {
            User.SetHp(User.HP);
            User.CompleteAction();
-           User.SetHp(60);
+
         }
    
     }

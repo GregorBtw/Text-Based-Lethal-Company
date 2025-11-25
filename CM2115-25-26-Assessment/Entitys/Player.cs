@@ -128,6 +128,8 @@ public class Player : Entity
             bool ItemsInRoom = false;
             bool HasItems = false;
 
+            CurrentRoom.CheckForPuzzle(instance);
+
             Console.Clear();
             HealthBar.DisplayHealthBar();
             CurrentRoom.DisplayCurrentRoomInformation();

@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System;
 using interfaces.puzzlebehaviours;
+using entitys.players;
 
 namespace behaviours.puzzlebehaviours;
 public class ChoiceBased : IPuzzleBehaviours
@@ -9,21 +10,20 @@ public class ChoiceBased : IPuzzleBehaviours
 
     public String Description { get; set; }
 
-    public String[] Answers { get; set; }
+    public String Answer { get; set; }
 
-    public String[] UserAnswers;
+    public String UserAnswer { get; set; }
     public String Question;
     public String[] Options { get; set; }
-    public bool IsCompleted { get; set; }
+    public bool IsCompleted = false;
 
     //constructor
-    public ChoiceBased(String description, String question, String[] options, String[] answers)
+    public ChoiceBased(String description, String question, String[] options, String answer)
     {
         this.Description = description;
         this.Question = question;
         this.Options = options;
-        this.Answers = answers;
-        this.IsCompleted = false;
+        this.Answer = answer;
     }
 
     //methods
@@ -31,22 +31,40 @@ public class ChoiceBased : IPuzzleBehaviours
     public void PromptPuzzle()
     {
 
-        for(var list = 0; list < Options.Length; list++)
-        {
-            Console.WriteLine("This room contains a choice based puzzle, to pass through you must answer the following: \n");
+            Console.WriteLine($"{Description} \n");
 
             Console.WriteLine($"{Question}\n");
 
-            for(var item = 0; item < Options[list].Length; item++)
+            for(var i = 0; i < Options.Length; i++)
             {
-                Console.WriteLine($"• {Options}");
+                Console.WriteLine($"• {Options[i]}");
             }
 
-            Console.WriteLine("Please enter your answer: \n");
+            Console.WriteLine("\nPlease enter your answer: \n");
             String rawInput = Console.ReadLine();
-            UserAnswers.Append(rawInput.ToLower());
-        
+            UserAnswer = rawInput.ToUpper();
+        while (UserAnswer != "A" && UserAnswer != "B" && UserAnswer != "C")
+        {
+            Console.WriteLine("Please enter a valid answer: \n");
+            rawInput = Console.ReadLine();
+            UserAnswer = rawInput.ToUpper();
         }
 
+    }
+
+    public void CheckAnswer(Player User)
+    {
+        if (UserAnswer==Answer)
+        {
+            Console.WriteLine("Puzzle Complete, you pass into the room");
+            Thread.Sleep(2000);
+        
+        }else if (UserAnswer!=Answer)
+        {
+            Console.WriteLine($"Incorrect, the correct answer was '{Answer}'");
+            Console.WriteLine("you take 10 damage and pass through into the room");
+            User.SetHp(User.HP-10);
+            Thread.Sleep(2000);
+        }
     }
 }

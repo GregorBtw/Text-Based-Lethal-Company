@@ -1,28 +1,29 @@
 using System;
+using System.Runtime.CompilerServices;
+using entitys.players;
 using interfaces.puzzlebehaviours;
 
 namespace puzzles;
 public class Puzzle
 {
     //Attributes
-    public int AttemptsLeft;
-
     public bool isSolved;
 
-    public IPuzzleBehaviours PuzzleBehaviour;
+    public IPuzzleBehaviours PuzzleBehaviour { get; set; }
 
     //Constructor
-    public Puzzle(int attemptsLeft, IPuzzleBehaviours puzzleBehaviour)
+    public Puzzle(IPuzzleBehaviours puzzleBehaviour)
     {
-        this.AttemptsLeft = attemptsLeft;
         this.PuzzleBehaviour = puzzleBehaviour;
         this.isSolved = false;
     }
 
     //Methods
-    public void AttemptPuzzle()
+    public void AttemptPuzzle(Player User)
     {
         //Prompt the puzzle to the player
         PuzzleBehaviour.PromptPuzzle();
+        PuzzleBehaviour.CheckAnswer(User);
+        isSolved = true;
     }
 }

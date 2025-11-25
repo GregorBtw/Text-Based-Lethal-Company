@@ -6,6 +6,8 @@ using behaviours.itembehaviours;
 using roomBuilder;
 using entitys.Creatures;
 using behaviours.attackbehaviours;
+using puzzles;
+using behaviours.puzzlebehaviours;
 
 
 
@@ -14,7 +16,6 @@ public class Assurance : IMoonBehaviour
     public void CreateMoon(Map Ship, Map WareHouse)
     {
 
-           //Initialise Value Items
            //Initialise Value Items
            Item Cog = new Item("cog", 45, new ValueItem(), "A solid, rust-flecked gear used in old machinery. Still sturdy enough to be useful in repairs or crafting.");
            Item LargeAxle = new Item("large axle", 90, new ValueItem(), "A thick metal axle, heavy and worn. Essential for restoring larger mechanical systems.");
@@ -35,6 +36,14 @@ public class Assurance : IMoonBehaviour
            Creature BunkerSpider = new Creature("bunker spider", 80, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
            Creature Nutcracker = new Creature("nutcracker", 100, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
 
+           //Initialise ChoiceBasedPuzzles
+           Puzzle ChoicePuzzle1 = new Puzzle(new ChoiceBased("This room contains a choice based puzzle, to pass through you must answer the following:",
+                                                             "In programming, what is the main purpose of using a hash table (or dictionary/map)?",
+                                                             ["A. To store data in a sorted list for fast sequential access",
+                                                              "B. To store key–value pairs for fast lookups using a unique key",
+                                                              "C. To execute multiple tasks at the same time using parallel threads"], "B"));
+
+
 
 
             //Initially Create Rooms
@@ -51,7 +60,7 @@ public class Assurance : IMoonBehaviour
                 "Ship Entrance",
                 new List<Item> {  },
                 "Metal benches and storage racks sit bolted to the floor. The exit ramp leads into the facility."
-            ).Build());
+            ).AddPuzzle(ChoicePuzzle1).Build());
 
 
             //WareHouse
