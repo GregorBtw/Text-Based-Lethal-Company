@@ -6,9 +6,10 @@ using maps;
 using System.Reflection.Metadata;
 using Observers.HealthBar;
 using Game_Data;
-
-
 using interfaces.Observer;
+using behaviours.attackbehaviours;
+using items;
+
 
 
 namespace entitys.players;
@@ -18,8 +19,6 @@ public class Player : Entity
 {
     //Attributes
     private static Player instance = null;
-
-    public List<IObserver> Observers = new List<IObserver>();
 
     public HealthBar HealthBar = new HealthBar();
 
@@ -46,24 +45,6 @@ public class Player : Entity
 
     //Methods
 
-
-    public void AttachObserver(IObserver observer)
-    {
-        Observers.Add(observer);
-    }
-
-    public void DetachObserver(IObserver observer)
-    {
-        Observers.Remove(observer);
-    }
-
-    public void SetHp(int value)
-    {
-        HP = value;
-        foreach (var observer in Observers)
-            observer.Update(HP);
-    }
-
     public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");
@@ -79,7 +60,7 @@ public class Player : Entity
 
         if (instance == null)
         {
-            instance = new Player(Username, 100, startRoom, new Inventory());
+            instance = new Player(Username, 0, startRoom, new Inventory());
         }
 
         return instance;
@@ -120,6 +101,22 @@ public class Player : Entity
         }
     }
 
+    public void AttackEnemy()
+    {
+        
+        Console.WriteLine("What item would you like to use to attack?: \n");
+
+        Inventory.DisplayWeapons();
+
+        String? Str = Console.ReadLine();
+        String Input = Str.ToLower();
+
+        Item? Weapon = Inventory.GetItem(Input);
+
+        Weapon.ItemBehaviour.Use(CurrentRoom.Enemy);
+
+    }
+
     public void CompleteAction(GameData gameData)
     {
         var CompletingActions = true;
@@ -129,49 +126,58 @@ public class Player : Entity
             bool ItemsInRoom = false;
             bool HasItems = false;
 
+            CurrentRoom.CheckForEnemy(instance);
             CurrentRoom.CheckForPuzzle(instance);
 
-            gameData.displayUIinfo(HealthBar, CurrentRoom);
-            Console.WriteLine($"What would you like to do next {instance.Name}?\n");
-            Thread.Sleep(500);
+            if (HP > 0)
+            {
+                    gameData.displayUIinfo(HealthBar, CurrentRoom);
+                    Console.WriteLine($"What would you like to do next {instance.Name}?\n");
+                    Thread.Sleep(500);
 
-            if (CurrentRoom.Items.Count > 0)
-            {
-                Console.WriteLine("• Equip an item in this room - Press [E]");
-                ItemsInRoom = true;
-            }
-            Console.WriteLine("• Move to another room - Press [M]");
-            if(Inventory.Items.Count > 0)
-            {
-                Console.WriteLine("• Drop an item in this room - Press [D]");
-                HasItems = true;
-            }
-            String RawInput = Console.ReadLine();
-            String Input = RawInput.Trim().ToLower();
+                    if (CurrentRoom.Items.Count > 0)
+                    {
+                        Console.WriteLine("• Equip an item in this room - Press [E]");
+                        ItemsInRoom = true;
+                    }
+                    Console.WriteLine("• Move to another room - Press [M]");
+                    if(Inventory.Items.Count > 0)
+                    {
+                        Console.WriteLine("• Drop an item in this room - Press [D]");
+                        HasItems = true;
+                    }
+                    String RawInput = Console.ReadLine();
+                    String Input = RawInput.Trim().ToLower();
 
-            if (Input == "e"&&ItemsInRoom)
+                    if (Input == "e"&&ItemsInRoom)
+                    {
+                        gameData.displayUIinfo(HealthBar, CurrentRoom);
+                        CurrentRoom.PickUpItem(Inventory);
+                    }
+                    else if(Input == "m")
+                    {
+                        CompletingActions = false;
+                        gameData.displayUIinfo(HealthBar, CurrentRoom);
+                        Move();
+                    }
+                    else if(Input == "d"&&HasItems)
+                    {
+                        gameData.displayUIinfo(HealthBar, CurrentRoom);
+                        CurrentRoom.DropItem(Inventory);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid input for an action");
+                        Thread.Sleep(1000);
+                    }               
+            }else if (HP <= 0)
             {
-                gameData.displayUIinfo(HealthBar, CurrentRoom);
-                CurrentRoom.PickUpItem(Inventory);
+                Console.Clear();
+                Console.WriteLine("You died, thanks for playing!");
+                Thread.Sleep(3000);
+                isPlaying = false;
+                return;
             }
-            else if(Input == "m")
-            {
-                CompletingActions = false;
-                gameData.displayUIinfo(HealthBar, CurrentRoom);
-                Move();
-            }
-            else if(Input == "d"&&HasItems)
-            {
-                gameData.displayUIinfo(HealthBar, CurrentRoom);
-                CurrentRoom.DropItem(Inventory);
-            }
-            else
-            {
-                Console.WriteLine("Please enter a valid input for an action");
-                Thread.Sleep(1000);
-            }
-
-
 
         }
 
