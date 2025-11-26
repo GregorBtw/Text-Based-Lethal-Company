@@ -7,13 +7,12 @@ public class HeavyStrike : IAttackBehaviour
 {
 
     //Attributes
-
-    public int DamageAmount = 100;
+    public int DamageAmount = 60;
 
     //Methods
     public void DealDamage(Entity target)
     {
-        //Implementation of heavy strike damage logic
-        // For example, reduce target's HP by a fixed amount or a calculated value
+        Console.WriteLine("A heavy strike has been landed");
+        target.SetHp(target.HP-DamageAmount);
     }
 }
