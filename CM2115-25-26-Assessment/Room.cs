@@ -94,11 +94,7 @@ public class Room
 
         while (!itemDropped)
         {
-            Console.WriteLine($"Your Inventory:\n");
-            for(var i = 0; i < Inventory.Items.Count; i++)
-            {
-                Console.WriteLine($"• {Inventory.Items[i].Name}");
-            }
+            Inventory.DisplayItems();
             Console.WriteLine("Please type the name of the item you would like to drop: \n");
             String RawItem = Console.ReadLine();
             String Item = RawItem.ToLower();
@@ -132,5 +128,20 @@ public class Room
                 return;
             }
         }
+    }
+
+    public void CheckForEnemy(Player User)
+    {
+        if (Enemy!=null)
+        {
+            if (!Enemy.isDead)
+            {
+                EntityBattleManager.StartBattle(User, Enemy);
+                
+            }else if (Enemy.isDead)
+            {
+                return;
+            }
+        }        
     }              
 }
