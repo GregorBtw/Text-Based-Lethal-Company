@@ -20,14 +20,14 @@ public class Program
         Player User = Player.Initialise(Moon.Ship.Rooms["0,0"]);
         GameData gameData = GameData.Initialise(150, User);
         User.AttachObserver(User.HealthBar);
+        User.SetHp(User.HP);
 
         //Movement
         while (User.isPlaying)
         {
-           User.SetHp(User.HP);
            User.CompleteAction(gameData);
 
         }
-   
+
     }
 }
