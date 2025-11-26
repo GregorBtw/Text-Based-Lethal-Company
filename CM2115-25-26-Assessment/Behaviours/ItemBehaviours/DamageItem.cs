@@ -1,11 +1,12 @@
 using System.Runtime.CompilerServices;
 using interfaces.itembehaviours;
 using interfaces.attackbehaviours;
+using entitys;
 
 namespace behaviours.itembehaviours;
 public class DamageItem : IItemBehaviour
 {
-    //Attributes#
+    //Attributes
     public IAttackBehaviour AttackBehaviour;
 
     //Constructor
@@ -15,14 +16,13 @@ public class DamageItem : IItemBehaviour
     }
 
     //Methods
-
-    public void Use()
+    public void Use(Entity target)
     {
-        //Implementation of item use logic
-        // For example, apply item's effect to the user or target
+        AttackBehaviour.DealDamage(target);
     }
     public void Equip()
     {
-        
+        Console.WriteLine("You picked up a Weapon!\n");
+        Console.WriteLine("You are able to attack enemys with this");
     }
 }

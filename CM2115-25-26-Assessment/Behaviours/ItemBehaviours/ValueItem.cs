@@ -1,10 +1,11 @@
+using entitys;
 using interfaces.itembehaviours;
 
 namespace behaviours.itembehaviours;
 
 public class ValueItem : IItemBehaviour
 {
-    public void Use()
+    public void Use(Entity target)
     {
         //Implementation of item use logic
         // For example, apply item's effect to the user or target

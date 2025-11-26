@@ -31,19 +31,22 @@ public class Assurance : IMoonBehaviour
            Item ShotGun = new Item("shot gun", 100, new DamageItem(new Shoot()), "An old, sawed-off shotgun. Loud, powerful, and devastating at close range.");
 
            //Initialise Enemys
-           Creature Thumper = new Creature("thumper", 60, new HeavyStrike(), "A hulking creature with distorted limbs that slam into the ground with bone-cracking force. Slow but terrifyingly strong.");
-           Creature Bracken = new Creature("bracken", 120, new InstantKill(), "A tall, silent humanoid shape that stalks in the dark. Moves unnaturally fast and kills without hesitation.");
-           Creature BunkerSpider = new Creature("bunker spider", 80, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
-           Creature Nutcracker = new Creature("nutcracker", 100, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
+           Creature Thumper = new Creature("thumper", 30, new HeavyStrike(), "A hulking creature with distorted limbs that slam into the ground with bone-cracking force. Slow but terrifyingly strong.");
+           Creature Bracken = new Creature("bracken", 20, new InstantKill(), "A tall, silent humanoid shape that stalks in the dark. Moves unnaturally fast and kills without hesitation.");
+           Creature BunkerSpider = new Creature("bunker spider", 25, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
+           Creature Nutcracker = new Creature("nutcracker", 40, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
 
            //Initialise ChoiceBasedPuzzles
-           Puzzle ChoicePuzzle1 = new Puzzle(new ChoiceBased("This room contains a choice based puzzle, to pass through you must answer the following:",
+           Puzzle ChoicePuzzle = new Puzzle(new ChoiceBased("This room contains a choice based puzzle, to pass through you must answer the following:",
                                                              "In programming, what is the main purpose of using a hash table (or dictionary/map)?",
                                                              ["A. To store data in a sorted list for fast sequential access",
                                                               "B. To store key–value pairs for fast lookups using a unique key",
                                                               "C. To execute multiple tasks at the same time using parallel threads"], "B"));
 
-           Puzzle MemoryBased1 = new Puzzle(new MemoryBased("This room contains a memory based puzzle, to pass through you must repeat the sequence 8 times back to the terminal"));
+           Puzzle MemoryBased = new Puzzle(new MemoryBased("This room contains a memory based puzzle, to pass through you must repeat the sequence 8 times back to the terminal"));
+
+           Puzzle SingleAnswer1 = new Puzzle(new SingleAnswer("This room contains a single answer based puzzle, to pass through you must answer the following:", "What C# keyword is used to define a method that must be implemented by any non-abstract derived", "abstract"));
+           Puzzle SingleAnswer2 = new Puzzle(new SingleAnswer("This room contains a single answer based puzzle, to pass through you must answer the following:", "What keyword is used in C# to create an instance of a class?", "new"));
 
 
             //Initially Create Rooms
@@ -54,26 +57,26 @@ public class Assurance : IMoonBehaviour
                 "Ship Control Compartment",
                 new List<Item> {  },
                 "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
-            ).AddPuzzle(MemoryBased1).Build());
+            ).Build());
 
             Ship.AddRoom("0,1", new RoomBuilder().AddMainData(
                 "Ship Entrance",
                 new List<Item> {  },
                 "Metal benches and storage racks sit bolted to the floor. The exit ramp leads into the facility."
-            ).AddPuzzle(ChoicePuzzle1).Build());
+            ).Build());
 
 
             //WareHouse
 
             WareHouse.AddRoom("-1,2", new RoomBuilder().AddMainData(
                 "Storage Room A",
-                new List<Item> { Cog, Pipe },
+                new List<Item> { LargeAxle },
                 "Stacks of old shipping crates rest under layers of dust. Something has disturbed the cobwebs recently."
-            ).Build());
+            ).AddPuzzle(ChoicePuzzle).Build());
 
             WareHouse.AddRoom("0,2", new RoomBuilder().AddMainData(
                 "Main WareHouse Entrance",
-                new List<Item> { LargeAxle },
+                new List<Item> { Cog, Pipe },
                 "Large cargo doors dominate the room. Forklifts sit abandoned, and scattered scrap covers the floor."
             ).Build());
 
@@ -87,7 +90,7 @@ public class Assurance : IMoonBehaviour
                 "Observation Control Room",
                 new List<Item> { LargeAxle, ShotGun},
                 "Dust-covered windows overlook the warehouse floor. A chair lies knocked over beside the monitors."
-            ).Build());
+            ).AddPuzzle(SingleAnswer1).Build());
 
             WareHouse.AddRoom("0,3", new RoomBuilder().AddMainData(
                 "Maintenance Workshop",
@@ -99,7 +102,7 @@ public class Assurance : IMoonBehaviour
                 "Security Monitoring Room",
                 new List<Item> { Lockpicker },
                 "Old security screens flicker with static. Lockers stand open, their contents missing."
-            ).Build());
+            ).AddPuzzle(SingleAnswer2).Build());
 
             WareHouse.AddRoom("-1,4", new RoomBuilder().AddMainData(
                 "Lower Cargo Storage",
@@ -111,7 +114,7 @@ public class Assurance : IMoonBehaviour
                 "Lower Access Hallway",
                 new List<Item> { MetalSheet, Lockpicker},
                 "A narrow concrete hallway with peeling paint. Every step echoes louder than it should."
-            ).Build());
+            ).AddPuzzle(MemoryBased).Build());
 
             WareHouse.AddRoom("1,4", new RoomBuilder().AddMainData(
                 "Lower Management Office",
