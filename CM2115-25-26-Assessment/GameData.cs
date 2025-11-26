@@ -5,6 +5,8 @@ using entitys.players;
 using interfaces.GameData;
 using Observers.HealthBar;
 using rooms;
+using entitys;
+using entitys.Creatures;
 
 namespace Game_Data;
 
@@ -45,6 +47,19 @@ public class GameData : IGameData
         healthBar.DisplayHealthBar();
         CurrentRoom.DisplayCurrentRoomInformation();
     }
+
+    public static void displayBattleHealth(Player User, Creature enemy)
+    {
+        Console.WriteLine("Players Health: ");
+        User.HealthBar.DisplayHealthBar();
+        
+        Console.WriteLine("\nEnemys Health: ");
+        enemy.SetHp(User.HP);
+        enemy.HealthBar.DisplayHealthBar(); 
+        Console.WriteLine("-------------------------------");      
+    }
+
+
 
     public void GameDataPrompt()
     {
