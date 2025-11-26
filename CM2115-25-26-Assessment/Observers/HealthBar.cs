@@ -7,7 +7,7 @@ public class HealthBar : IObserver
 
     //attributes
 
-    public string healthBar;
+    public string healthBar = "";
 
 
     //Methods

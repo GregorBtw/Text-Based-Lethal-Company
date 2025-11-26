@@ -3,6 +3,8 @@ using System.ComponentModel.Design;
 using System.Reflection.Metadata;
 using entitys.players;
 using interfaces.GameData;
+using Observers.HealthBar;
+using rooms;
 
 namespace Game_Data;
 
@@ -35,6 +37,13 @@ public class GameData : IGameData
     private void DisplayQuota()
     {
         Console.WriteLine(Quota);
+    }
+
+    public void displayUIinfo(HealthBar healthBar, Room CurrentRoom)
+    {
+        Console.Clear();
+        healthBar.DisplayHealthBar();
+        CurrentRoom.DisplayCurrentRoomInformation();
     }
 
     public void GameDataPrompt()

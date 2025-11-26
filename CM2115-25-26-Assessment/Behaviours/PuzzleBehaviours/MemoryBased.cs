@@ -48,6 +48,7 @@ public class MemoryBased : IPuzzleBehaviours
                 String Str = Number.ToString();
                 Sequence.Add(Str);
 
+                Console.Clear();
                 Console.WriteLine($"\nSequence: {string.Join(", ", Sequence)}\n");
                 Thread.Sleep(2500);
                 Console.Clear();
@@ -69,6 +70,8 @@ public class MemoryBased : IPuzzleBehaviours
                     if (i == 8)
                     {
                         Console.WriteLine("Puzzle Complete, you pass into the room");
+                        User.PuzzlesSolved+=1;
+                        Thread.Sleep(2000);
                     }
                 }else if(PlayerSequence != Sequence)
                 {

@@ -9,7 +9,7 @@ using puzzles;
 namespace roomBuilder;
 public class RoomBuilder
 {
-    public string Name;
+    public string Name { get; set; }
 
     public List<Item> Items { get; set; }
 

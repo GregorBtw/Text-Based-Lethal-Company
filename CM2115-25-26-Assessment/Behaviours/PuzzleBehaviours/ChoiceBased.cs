@@ -12,8 +12,8 @@ public class ChoiceBased : IPuzzleBehaviours
 
     public String Answer { get; set; }
 
-    public String UserAnswer { get; set; }
-    public String Question;
+    public String UserAnswer;
+    public String Question { get; set; }
     public String[] Options { get; set; }
     public bool IsCompleted = false;
 

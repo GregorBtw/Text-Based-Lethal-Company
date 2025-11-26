@@ -5,6 +5,7 @@ using rooms;
 using maps;
 using System.Reflection.Metadata;
 using Observers.HealthBar;
+using Game_Data;
 
 
 using interfaces.Observer;
@@ -66,7 +67,7 @@ public class Player : Entity
     public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");
-        var Username = Console.ReadLine();
+        String Username = Console.ReadLine();
 
         while(Username.Length<=3||Username.Length>=15)
         {
@@ -111,7 +112,7 @@ public class Player : Entity
             }
             instance.CurrentRoom = nextRoom; // move the player
             Console.Clear();
-            Console.WriteLine($"You moved to {nextRoom.Name}.");
+            Console.WriteLine($"You moved to {nextRoom.Name}.\n");
         }
         else
         {
@@ -119,7 +120,7 @@ public class Player : Entity
         }
     }
 
-    public void CompleteAction()
+    public void CompleteAction(GameData gameData)
     {
         var CompletingActions = true;
 
@@ -130,9 +131,7 @@ public class Player : Entity
 
             CurrentRoom.CheckForPuzzle(instance);
 
-            Console.Clear();
-            HealthBar.DisplayHealthBar();
-            CurrentRoom.DisplayCurrentRoomInformation();
+            gameData.displayUIinfo(HealthBar, CurrentRoom);
             Console.WriteLine($"What would you like to do next {instance.Name}?\n");
             Thread.Sleep(500);
 
@@ -152,24 +151,18 @@ public class Player : Entity
 
             if (Input == "e"&&ItemsInRoom)
             {
-                Console.Clear();
-                HealthBar.DisplayHealthBar();
-                CurrentRoom.DisplayCurrentRoomInformation();
+                gameData.displayUIinfo(HealthBar, CurrentRoom);
                 CurrentRoom.PickUpItem(Inventory);
             }
             else if(Input == "m")
             {
                 CompletingActions = false;
-                Console.Clear();
-                HealthBar.DisplayHealthBar();
-                CurrentRoom.DisplayCurrentRoomInformation();
+                gameData.displayUIinfo(HealthBar, CurrentRoom);
                 Move();
             }
             else if(Input == "d"&&HasItems)
             {
-                Console.Clear();
-                HealthBar.DisplayHealthBar();
-                CurrentRoom.DisplayCurrentRoomInformation();
+                gameData.displayUIinfo(HealthBar, CurrentRoom);
                 CurrentRoom.DropItem(Inventory);
             }
             else

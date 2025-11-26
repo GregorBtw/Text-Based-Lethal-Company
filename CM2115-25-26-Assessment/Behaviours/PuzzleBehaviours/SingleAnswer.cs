@@ -38,6 +38,8 @@ namespace behaviours.puzzlebehaviours;
             if (input == Answer)
             {
                 Console.WriteLine("Puzzle Complete, you pass into the room");
+                User.PuzzlesSolved+=1;
+                Thread.Sleep(2000);
             }else if (input != Answer)
             {
                 Console.WriteLine($"Incorrect, the correct answer was '{Answer}'");
