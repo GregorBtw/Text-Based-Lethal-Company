@@ -23,7 +23,6 @@ public class EntityBattleManager
                 break;                
             }
 
-
             GameData.displayBattleHealth(User, enemy);
             enemy.AttackPlayer(User);
             Thread.Sleep(2500);

@@ -1,8 +1,8 @@
 using System;
-using interfaces.movebehaviours;
+using interfaces.ImapBehaviour;
 
 namespace behaviours.movebehaviours;
-public class MoveInWareHouse : IMoveBehaviour
+public class WareHouse : IMapBehaviour
 {
     public void Move()
     {

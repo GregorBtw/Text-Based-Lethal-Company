@@ -1,6 +1,5 @@
-using System;
 using rooms;
-using interfaces.movebehaviours;
+using interfaces.ImapBehaviour;
 
 namespace interfaces.map;
 
@@ -8,7 +7,7 @@ public interface IMap
 {
     Dictionary<string, Room> Rooms { get; set; }
 
-    IMoveBehaviour MoveBehaviour { get; set; }
+    IMapBehaviour MapBehaviour { get; set; }
 
     //Method signature
 

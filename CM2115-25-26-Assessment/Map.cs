@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using interfaces.movebehaviours;
+using interfaces.ImapBehaviour;
 using items;
 using rooms;
 
@@ -10,14 +10,14 @@ public class Map
     //Attributes
     public Dictionary<string, Room> Rooms { get; set; }
 
-    public IMoveBehaviour MoveBehaviour { get; set; }
+    public IMapBehaviour MapBehaviour { get; set; }
 
     //Constructor
 
-    public Map(IMoveBehaviour moveBehaviour)
+    public Map(IMapBehaviour mapBehaviour)
     {
         this.Rooms = new Dictionary<string, Room>();
-        this.MoveBehaviour = moveBehaviour;
+        this.MapBehaviour = mapBehaviour;
     }
 
     //Methods
@@ -26,6 +26,8 @@ public class Map
     {
         Rooms.Add(coord, room);
     }
+
+
     
     
 
