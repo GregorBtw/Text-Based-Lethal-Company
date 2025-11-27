@@ -1,6 +1,7 @@
 using System;
 using items;
 using behaviours.itembehaviours;
+using entitys.players;
 
 namespace inventory;
 
@@ -76,4 +77,22 @@ public class Inventory
         }
         Console.WriteLine("\n");
     }
+
+    public void updataCollectedScrap(Player User)
+    {
+        for(var i = 0; i < Items.Count; i++)
+        {
+            if(Items[i].ItemBehaviour is ValueItem)
+            {
+                User.ScrapValueCollected+=Items[i].Value;          
+            }
+
+            Console.WriteLine("\n");
+
+        }         
+    }
+
+    
+
+    
 }
