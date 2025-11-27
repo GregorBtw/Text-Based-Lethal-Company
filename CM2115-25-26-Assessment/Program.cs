@@ -28,8 +28,7 @@ public class Program
         //Movement
         while (User.isPlaying)
         {
-           User.CompleteAction(gameData);
-
+           User.CompleteAction(gameData, Moon);
         }
 
     }

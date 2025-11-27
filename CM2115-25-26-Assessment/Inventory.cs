@@ -78,7 +78,7 @@ public class Inventory
         Console.WriteLine("\n");
     }
 
-    public void updataCollectedScrap(Player User)
+    public void updateCollectedScrap(Player User)
     {
         for(var i = 0; i < Items.Count; i++)
         {

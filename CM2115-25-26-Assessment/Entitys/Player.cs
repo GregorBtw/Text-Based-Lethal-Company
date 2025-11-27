@@ -9,6 +9,7 @@ using Game_Data;
 using interfaces.Observer;
 using behaviours.attackbehaviours;
 using items;
+using Moons;
 
 
 
@@ -117,7 +118,50 @@ public class Player : Entity
 
     }
 
-    public void CompleteAction(GameData gameData)
+    public void SellScrap(int quota)
+    {
+        Console.Clear();
+
+        Console.WriteLine("Are you sure you want to sell your scrap, 'yes' or 'no'?\n");
+        Console.WriteLine("Once you do, you can not go back into the Warehouse");
+        String? Str = Console.ReadLine();
+        String? Input = Str.ToLower();
+
+        if (Input == "yes")
+        {
+            var Loading = "Loading";
+
+            for(var i = 0; i < 4; i++)
+            {
+                Console.WriteLine(Loading);
+                Loading+=".";
+                Thread.Sleep(500);
+                Console.Clear();
+            }
+
+            if (ScrapValueCollected >= quota)
+            {
+                Console.WriteLine("Congratulations, you beat the quota, have a nice day!");
+                Thread.Sleep(2500);
+                isPlaying=false;
+            }else if(ScrapValueCollected < quota)
+            {
+                Console.Clear();
+                Console.WriteLine("You have no items to sell! Go into the warehouse to find some.");
+                Thread.Sleep(2500);
+                Console.Clear();
+                return;
+            }         
+        }else if(Input == "no")
+        {
+            Console.Clear();
+            return;
+        }
+
+  
+    }
+
+    public void CompleteAction(GameData gameData, Moon moon)
     {
         var CompletingActions = true;
 
@@ -134,6 +178,13 @@ public class Player : Entity
                     gameData.displayUIinfo(HealthBar, CurrentRoom);
                     Console.WriteLine($"What would you like to do next {instance.Name}?\n");
                     Thread.Sleep(500);
+
+                    bool inShip = moon.CheckIfInShip(instance);
+
+                    if (inShip)
+                    {
+                        Console.WriteLine("• Use ship terminal- Press [T]");
+                    }
 
                     if (CurrentRoom.Items.Count > 0)
                     {
@@ -153,6 +204,7 @@ public class Player : Entity
                     {
                         gameData.displayUIinfo(HealthBar, CurrentRoom);
                         CurrentRoom.PickUpItem(Inventory);
+                        Inventory.updateCollectedScrap(instance);
                     }
                     else if(Input == "m")
                     {
@@ -164,6 +216,11 @@ public class Player : Entity
                     {
                         gameData.displayUIinfo(HealthBar, CurrentRoom);
                         CurrentRoom.DropItem(Inventory);
+                        Inventory.updateCollectedScrap(instance);
+                    }
+                    else if(Input == "t")
+                    {
+                        gameData.GameDataPrompt();
                     }
                     else
                     {
@@ -185,21 +242,19 @@ public class Player : Entity
  
     public void DisplayPuzzlesSolved()
     {
+        Console.WriteLine("Puzzles Solved:\n");
         Console.WriteLine(PuzzlesSolved);
     }
 
     public void DisplayScrapValueCollected()
     {
+        Console.WriteLine("Scrap Value Collected:\n");
         Console.WriteLine(ScrapValueCollected);        
-    }
-
-    public void DisplayInventoryItems()
-    {
-        Console.WriteLine(Inventory);       
     }
 
     public void DisplayEnemysKilled()
     {
+        Console.WriteLine("Puzzles Solved:\n");
         Console.WriteLine(EnemysKilled);       
     }
 }

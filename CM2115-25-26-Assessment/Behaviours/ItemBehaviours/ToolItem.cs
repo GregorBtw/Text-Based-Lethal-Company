@@ -5,9 +5,6 @@ using interfaces.itembehaviours;
 namespace behaviours.itembehaviours;
 public class ToolItem : IItemBehaviour
 {
-
-    //Attributes
-
     //Methods
 
     public void Use(Entity target)

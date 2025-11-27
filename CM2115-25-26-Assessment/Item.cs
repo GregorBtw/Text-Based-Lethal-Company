@@ -33,7 +33,5 @@ public class Item
     public void Equip()
     {
         ItemBehaviour.Equip();
-
-        
     }
 }
