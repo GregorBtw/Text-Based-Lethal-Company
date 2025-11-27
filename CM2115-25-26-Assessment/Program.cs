@@ -16,6 +16,9 @@ public class Program
         Moon Moon = new Moon(new Assurance());
         Moon.Initialise();
 
+        //Introduction
+        GameData.displayGameInfo();
+
         //Initialise Player settings
         Player User = Player.Initialise(Moon.Ship.Rooms["0,0"]);
         GameData gameData = GameData.Initialise(150, User);

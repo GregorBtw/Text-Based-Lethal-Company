@@ -47,7 +47,7 @@ public class Player : Entity
 
     public static Player Initialise(Room startRoom)
     {
-        Console.WriteLine("Please enter a username! (Greater than 3 characters, fewer than 15): ");
+        Console.WriteLine("\nPlease enter a username! (Greater than 3 characters, fewer than 15): ");
         String Username = Console.ReadLine();
 
         while(Username.Length<=3||Username.Length>=15)
@@ -60,7 +60,7 @@ public class Player : Entity
 
         if (instance == null)
         {
-            instance = new Player(Username, 0, startRoom, new Inventory());
+            instance = new Player(Username, 100, startRoom, new Inventory());
         }
 
         return instance;

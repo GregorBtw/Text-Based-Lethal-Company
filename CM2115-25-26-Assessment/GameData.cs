@@ -41,6 +41,37 @@ public class GameData : IGameData
         Console.WriteLine(Quota);
     }
 
+    public static void displayGameInfo()
+    {
+        Console.WriteLine("Welcome to text based lethal company!\n");
+        Thread.Sleep(3000);
+        Console.Clear();
+
+        Console.WriteLine("Game Instructions:\n");
+        Thread.Sleep(2000);
+        Console.WriteLine("You must go into the warehouse and collect as much scrap as you can to complete the quota.\n");
+        Thread.Sleep(2000);
+        Console.WriteLine("there will be puzzles and enemys that try to stop you.\n");
+        Thread.Sleep(2000);
+        Console.WriteLine("and once you have collected enough scrap you must make it back to the ship in order to sell it\n");
+        Thread.Sleep(2000);
+        Console.WriteLine("Once you have been inside the warehouse once, you cannot enter back in.\n");
+        Thread.Sleep(2000);
+
+        Console.WriteLine("When you are ready to begin, Please enter 'Read': ");
+        String? Str = Console.ReadLine();
+        String? Input = Str.ToLower();
+
+        while (Input != "read")
+        {
+            Console.WriteLine("Please enter 'Read' to begin: ");
+            Str = Console.ReadLine();
+            Input = Str.ToLower();
+        }
+
+        Console.Clear();
+    }
+
     public void displayUIinfo(HealthBar healthBar, Room CurrentRoom)
     {
         Console.Clear();
