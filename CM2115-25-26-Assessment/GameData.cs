@@ -7,6 +7,7 @@ using Observers.HealthBar;
 using rooms;
 using entitys;
 using entitys.Creatures;
+using inventory;
 
 namespace Game_Data;
 
@@ -94,25 +95,60 @@ public class GameData : IGameData
 
     public void GameDataPrompt()
     {
-        var Input = Console.ReadLine();
+        bool Looping = true;
 
-        var Commands = new Dictionary<string, Action>
+        while (Looping)
         {
-            { "Quota", DisplayQuota},
-            { "ScrapValueCollected", Player.DisplayScrapValueCollected},
-            { "Inventory", Player.DisplayInventoryItems},
-            { "EnemysKilled", Player.DisplayEnemysKilled},
-            { "PuzzlesSolved", Player.DisplayPuzzlesSolved}
-        };
+            Console.WriteLine("Please enter a keyword to execute an action\n");
 
-        if (Commands.TryGetValue(Input, out Action method))
-        {
-            method();
+            var Commands = new Dictionary<string, Action>
+            {
+                { "quota", DisplayQuota},
+                { "scrapvaluecollected", Player.DisplayScrapValueCollected},
+                { "inventory", Player.Inventory.DisplayItems},
+                { "enemyskilled", Player.DisplayEnemysKilled},
+                { "puzzlessolved", Player.DisplayPuzzlesSolved},
+                { "sellscrap", () => Player.SellScrap(Quota)}
+            };
+
+            foreach(var i in Commands)
+            {
+                Console.WriteLine($"• {i.Key}");           
+            }
+
+            Console.WriteLine("\n");
+
+            String? Str = Console.ReadLine();
+            String? Input = Str.ToLower();
+            
+            if (Commands.TryGetValue(Input, out Action method))
+            {
+                Console.Clear();
+                method();
+
+                Console.WriteLine("\nIf you would like to enter another command, type 'yes', and 'exit' to leave the terminal");
+                String? optionStr = Console.ReadLine();
+                String? optionInput = optionStr.ToLower();
+
+                while (optionInput != "yes" && optionInput != "exit")
+                {
+                    Console.WriteLine("Please enter either 'yes' or 'exit'");
+                    optionStr = Console.ReadLine();
+                    optionInput = optionStr.ToLower();
+                }
+
+                if (optionInput == "exit")
+                {
+                    Looping = false;
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Invalid Action");
+            }            
         }
-        else
-        {
-            Console.WriteLine("Invalid Action");
-        }
+
         
 
     }
