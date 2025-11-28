@@ -6,6 +6,7 @@ namespace interfaces.itembehaviours;
 public interface IItemBehaviour
 {
     //Method signature
+
     void Use(Entity target);
 
     void Equip();

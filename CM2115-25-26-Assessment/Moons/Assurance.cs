@@ -33,8 +33,8 @@ public class Assurance : IMoonBehaviour
            //Initialise Enemys
            Creature Thumper = new Creature("thumper", 30, new HeavyStrike(), "A hulking creature with distorted limbs that slam into the ground with bone-cracking force. Slow but terrifyingly strong.");
            Creature Bracken = new Creature("bracken", 20, new InstantKill(), "A tall, silent humanoid shape that stalks in the dark. Moves unnaturally fast and kills without hesitation.");
-           Creature BunkerSpider = new Creature("bunker spider", 25, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
-           Creature Nutcracker = new Creature("nutcracker", 40, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
+           Creature BunkerSpider = new Creature("bunker spider", 20, new Strike(), "A large, skittering spider mutated by the environment. Its strikes are quick and venomous.");
+           Creature Nutcracker = new Creature("nutcracker", 30, new Shoot(), "A mechanical abomination with a hinged steel jaw mechanism. Raises its weapon with cold precision before firing with deadly accuracy.");
 
            //Initialise ChoiceBasedPuzzles
            Puzzle ChoicePuzzle = new Puzzle(new ChoiceBased("This room contains a choice based puzzle, to pass through you must answer the following:",

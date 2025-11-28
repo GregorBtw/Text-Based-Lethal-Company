@@ -102,20 +102,9 @@ public class Player : Entity
         }
     }
 
-    public void AttackEnemy()
+    public void AttackEnemy(Item Weapon)
     {
-        
-        Console.WriteLine("What item would you like to use to attack?: \n");
-
-        Inventory.DisplayWeapons();
-
-        String? Str = Console.ReadLine();
-        String Input = Str.ToLower();
-
-        Item? Weapon = Inventory.GetItem(Input);
-
         Weapon.ItemBehaviour.Use(CurrentRoom.Enemy);
-
     }
 
     public void SellScrap(int quota)
