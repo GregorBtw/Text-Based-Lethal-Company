@@ -4,25 +4,28 @@ using interfaces.attackbehaviours;
 using entitys;
 
 namespace behaviours.itembehaviours;
+
 public class DamageItem : IItemBehaviour
 {
-    //Attributes
+    // Attribute to store attack behavior for the weapon
     public IAttackBehaviour AttackBehaviour;
 
-    //Constructor
+    // Constructor initializes the attack behavior for the damage item (e.g., weapon)
     public DamageItem(IAttackBehaviour attackBehaviour)
     {
         this.AttackBehaviour = attackBehaviour;
     }
 
-    //Methods
+    // Use method triggers the attack behavior, dealing damage to the target entity
     public void Use(Entity target)
     {
         AttackBehaviour.DealDamage(target);
     }
+
+    // Equip method gives feedback to the player when they pick up a weapon
     public void Equip()
     {
         Console.WriteLine("You picked up a Weapon!\n");
-        Console.WriteLine("You are able to attack enemys with this");
+        Console.WriteLine("You are able to attack enemies with this");
     }
 }
