@@ -7,7 +7,7 @@ public class HeavyStrike : IAttackBehaviour
 {
 
     //Attributes
-    public int DamageAmount = 60;
+    public int DamageAmount = 20;
 
     //Methods
     public void DealDamage(Entity target)

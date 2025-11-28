@@ -5,9 +5,10 @@ namespace behaviours.itembehaviours;
 
 public class ValueItem : IItemBehaviour
 {
+
     public void Use(Entity target)
     {
-        //
+        
     }
     public void Equip()
     {

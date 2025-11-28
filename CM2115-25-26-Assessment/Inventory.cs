@@ -46,7 +46,7 @@ public class Inventory
 
     public void DisplayWeapons()
     {
-        Console.WriteLine("Weapons in your inventory:");
+        Console.WriteLine("Weapons in your inventory:\n");
 
         if (Items.Count==0)
         {

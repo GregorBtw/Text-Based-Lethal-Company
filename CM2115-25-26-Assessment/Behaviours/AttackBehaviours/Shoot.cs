@@ -8,7 +8,7 @@ public class Shoot : IAttackBehaviour
 
     //Attributes
 
-    public int DamageAmount = 60;
+    public int DamageAmount = 30;
 
     //Methods
     public void DealDamage(Entity target)

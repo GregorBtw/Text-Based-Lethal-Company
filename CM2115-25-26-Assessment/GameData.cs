@@ -56,7 +56,7 @@ public class GameData : IGameData
         Thread.Sleep(2000);
         Console.WriteLine("and once you have collected enough scrap you must make it back to the ship in order to sell it\n");
         Thread.Sleep(2000);
-        Console.WriteLine("Once you have been inside the warehouse once, you cannot enter back in.\n");
+        Console.WriteLine("Once you sell, you cannot go back into the warehouse, so make sure you have enough!\n\n");
         Thread.Sleep(2000);
 
         Console.WriteLine("When you are ready to begin, Please enter 'Read': ");
@@ -82,11 +82,12 @@ public class GameData : IGameData
 
     public static void displayBattleHealth(Player User, Creature enemy)
     {
-        Console.WriteLine("Players Health: ");
+        Console.Clear();
+        Console.WriteLine($"{User.Name}s Health: ");
         User.HealthBar.DisplayHealthBar();
         
-        Console.WriteLine("\nEnemys Health: ");
-        enemy.SetHp(User.HP);
+        Console.WriteLine($"\n{enemy.Name}s Health: ");
+        enemy.SetHp(enemy.HP);
         enemy.HealthBar.DisplayHealthBar(); 
         Console.WriteLine("-------------------------------");      
     }
@@ -121,7 +122,7 @@ public class GameData : IGameData
             String? Str = Console.ReadLine();
             String? Input = Str.ToLower();
             
-            if (Commands.TryGetValue(Input, out Action method))
+            if (Commands.TryGetValue(Input, out Action? method))
             {
                 Console.Clear();
                 method();

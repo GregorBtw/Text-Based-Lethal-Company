@@ -23,7 +23,6 @@ public class Puzzle
     {
         //Prompt the puzzle to the player
         PuzzleBehaviour.PromptPuzzle(User);
-        //PuzzleBehaviour.CheckAnswer(User);
         isSolved = true;
     }
 }

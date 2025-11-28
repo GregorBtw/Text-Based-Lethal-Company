@@ -77,6 +77,7 @@ public class MemoryBased : IPuzzleBehaviours
                 {
                     Console.WriteLine("Incorrect sequence");
                     Console.WriteLine("you take 10 damage and pass through into the room");
+                    User.SetHp(User.HP-10);
                     Thread.Sleep(2000);
                     return;
                 }

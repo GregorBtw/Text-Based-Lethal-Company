@@ -8,7 +8,7 @@ public class Strike : IAttackBehaviour
 
     //Attributes
 
-    public int DamageAmount = 60;
+    public int DamageAmount = 10;
 
     //Methods
     public void DealDamage(Entity target)

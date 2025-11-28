@@ -9,17 +9,17 @@ using puzzles;
 namespace roomBuilder;
 public class RoomBuilder
 {
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
-    public List<Item> Items { get; set; }
+    public List<Item>? Items { get; set; }
 
-    public String Information { get; set; }
+    public String? Information { get; set; }
 
-    public Dictionary<String, Room> SurroundingRooms { get; set; }
+    public Dictionary<String, Room>? SurroundingRooms { get; set; }
 
-    public Creature Enemy { get; set; }
+    public Creature? Enemy { get; set; }
 
-    public Puzzle Puzzle { get; set; }
+    public Puzzle? Puzzle { get; set; }
 
     //Constructors
 
