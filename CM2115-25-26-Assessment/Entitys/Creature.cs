@@ -8,22 +8,24 @@ namespace entitys.Creatures;
 
 public class Creature : Entity
 {
-
-    //Attributes
-
+    // Description of the creature (flavour text).
     public String Description;
 
+    // Death flag; HP still determines real death.
     public bool isDead;
 
+    // Strategy pattern: defines how the creature deals damage.
     public IAttackBehaviour AttackBehaviour;
 
-    //Constructor
-    public Creature(String name, int hp, IAttackBehaviour attackBehaviour, String description) : base(name, hp)
+    // Creates a creature with a name, HP, attack style, and description.
+    public Creature(String name, int hp, IAttackBehaviour attackBehaviour, String description)
+        : base(name, hp)
     {
         this.AttackBehaviour = attackBehaviour;
         this.Description = description;
     }
 
+    // Makes the creature attack the player using its behaviour object.
     public void AttackPlayer(Player User)
     {
         Console.WriteLine($"{Name} is now attacking you");
