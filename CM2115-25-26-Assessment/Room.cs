@@ -10,22 +10,17 @@ namespace rooms;
 
 public class Room
 {
+    // --- Attributes ---
+    public String Name;                               // Room's name
+    public List<Item> Items;                           // Items available in the room
+    public String Information;                         // Description / info about the room
+    public Dictionary<String, Room> SurroundingRooms; // Connections to adjacent rooms
+    public Creature Enemy;                             // Enemy present in the room
+    public Puzzle Puzzle;                              // Puzzle present in the room
+    public bool isLocked;                              // Is Room Locked
 
-    //Attributes
-    public String Name;
-
-    public List<Item> Items;
-
-    public String Information;
-
-    public Dictionary<String, Room> SurroundingRooms;
-
-    public Creature Enemy;
-
-    public Puzzle Puzzle;
-
-    //Constructor
-
+    // --- Constructor ---
+    // Initializes a room using a RoomBuilder (Builder Pattern)
     public Room(RoomBuilder Builder)
     {
         this.Name = Builder.Name;
@@ -34,114 +29,166 @@ public class Room
         this.SurroundingRooms = Builder.SurroundingRooms;
         this.Enemy = Builder.Enemy;
         this.Puzzle = Builder.Puzzle;
+        this.isLocked = Builder.isLocked;
     }
 
-    //Methods
+    // --- Methods ---
 
+    // Displays all the room's information including items
     public void DisplayCurrentRoomInformation()
     {
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Room Name:\n\n{Name}");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Room Information:\n\n{Information}");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine("Items:\n");
-            if (Items.Count==0)
-            {
-                Console.WriteLine("No Items!");
-            }else if (Items.Count>0)
-            {
-               for(var i=0;i<Items.Count;i++)
-                {
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine($"Room Name:\n\n{Name}");
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine($"Room Information:\n\n{Information}");
+        Console.WriteLine("-------------------------------");
+        Console.WriteLine("Items:\n");
 
-                    Console.WriteLine($"• {Items[i].Name} - {Items[i].Description}");
-                }             
-            }
-            Console.WriteLine("-------------------------------");
-    }
-
-    public void PickUpItem(Inventory Inventory)
-    {
-        var itemPickedUp = false;
-
-        while (!itemPickedUp)
+        if (Items.Count == 0)
         {
-            Console.WriteLine("Please type the name of the item you would like to pick up: \n");
-            String RawItem = Console.ReadLine();
-            String Item = RawItem.ToLower();
-
-            for(var i = 0; i < Items.Count; i++)
+            Console.WriteLine("No Items!");
+        }
+        else
+        {
+            for (var i = 0; i < Items.Count; i++)
             {
-                if (Item == Items[i].Name)
-                {
-                    Items[i].Equip();
-                    Inventory.AddItem(Items[i]);
-                    Items.Remove(Items[i]);
-                    itemPickedUp=true;
-                }
-                else
-                {
-                    Console.WriteLine("item does not exist in room, please pick up an existing item");
-                }              
+                Console.WriteLine($"• {Items[i].Name} - {Items[i].Description}");
             }             
         }
-      
+        Console.WriteLine("-------------------------------");
     }
 
-    public void DropItem(Inventory Inventory){
+    // Handles picking up an item from the room
+    public void PickUpItem(Inventory inventory)
+    {
+        Console.Clear();
+        Console.WriteLine("Please type the name of the item you would like to pick up: \n");
+        string? rawItem = Console.ReadLine();
+        string itemName = rawItem?.Trim().ToLower() ?? string.Empty;
 
+        var itemToPickUp = Items.FirstOrDefault(item => item.Name.ToLower() == itemName);
+
+        if (itemToPickUp != null)
+        {
+            if (inventory.CheckIfInventoryFull())
+            {
+                Console.WriteLine("You cannot pick up more items, your inventory is full!");
+                Thread.Sleep(2000);
+                return; 
+            }
+
+            inventory.AddItem(itemToPickUp);
+            Items.Remove(itemToPickUp); 
+            Console.WriteLine($"You have picked up: {itemToPickUp.Name}");
+            Thread.Sleep(1500); 
+        }
+        else
+        {
+            Console.WriteLine("That item doesn't exist in the room. Please try again.");
+            Thread.Sleep(1500); 
+        }
+    }
+
+    // Handles dropping an item into the room from inventory
+    public void DropItem(Inventory inventory)
+    {
         var itemDropped = false;
 
         while (!itemDropped)
         {
-            Inventory.DisplayItems();
-            Console.WriteLine("Please type the name of the item you would like to drop: \n");
-            String RawItem = Console.ReadLine();
-            String Item = RawItem.ToLower();
-            for(var i = 0; i < Inventory.Items.Count; i++)
-            {
-                if(Item == Inventory.Items[i].Name)
-                {
-                    Items.Add(Inventory.Items[i]);
-                    Inventory.RemoveItem(Inventory.Items[i]);
-                    itemDropped=true;
+            Console.Clear();
+            inventory.DisplayItems(); 
 
-                } else
-                {
-                    Console.WriteLine("Item entered not in inventory, Please enter a valid item");
-                }     
-            }           
+            if (inventory.Items.Count == 0)
+            {
+                Console.WriteLine("Your inventory is empty. You can't drop anything.");
+                return; 
+            }
+
+            Console.WriteLine("Please type the name of the item you would like to drop: \n");
+            string? rawItem = Console.ReadLine();
+            string itemName = rawItem?.Trim().ToLower() ?? string.Empty; 
+
+            var itemToDrop = inventory.Items.FirstOrDefault(item => item.Name.ToLower() == itemName);
+
+            if (itemToDrop != null) 
+            {
+                Items.Add(itemToDrop);
+                inventory.RemoveItem(itemToDrop);
+                itemDropped = true; 
+
+                Console.WriteLine($"You have dropped: {itemToDrop.Name}");
+                Thread.Sleep(1500); 
+            }
+            else
+            {
+                Console.WriteLine("Item not found in your inventory. Please enter a valid item.");
+                Thread.Sleep(1500); 
+            }
         }
-  
     }
 
+    // Checks if a puzzle exists and is unsolved, then attempts it
     public void CheckForPuzzle(Player User)
     {
-        if (Puzzle!=null)
+        if (Puzzle != null && !Puzzle.isSolved)
         {
-            if (!Puzzle.isSolved)
-            {
-                Puzzle.AttemptPuzzle(User);
-                
-            }else if (Puzzle.isSolved)
-            {
-                return;
-            }
+            Puzzle.AttemptPuzzle(User);
         }
     }
 
+    // Checks if an enemy exists and is alive, then starts a battle
     public void CheckForEnemy(Player User)
     {
-        if (Enemy!=null)
+        if (Enemy != null && !Enemy.isDead)
         {
-            if (!Enemy.isDead)
-            {
-                EntityBattleManager.StartBattle(User, Enemy);
-                
-            }else if (Enemy.isDead)
-            {
-                return;
-            }
+            EntityBattleManager.StartBattle(User, Enemy);
         }        
-    }              
+    }
+
+    public bool CheckForLock(Player User)
+    {
+        if (isLocked)
+        {
+            Console.WriteLine("Room is locked");
+            Thread.Sleep(2000);
+            Console.Clear();
+
+            bool hasLockPick = User.Inventory.CheckForLockpick();
+            if (hasLockPick)
+            {
+                Console.WriteLine("You have a lock pick to unlock this door, would you like to? 'yes' 'no': ");
+                String? Str = Console.ReadLine();
+                String Input = Str.Trim().ToLower();
+
+                if (Input == "yes")
+                {
+                    var itemToUse = User.Inventory.Items.FirstOrDefault(item => item.Name.ToLower() == "lockpicker");
+                    itemToUse.Use(User);
+                    Console.WriteLine("You unlocked the door");
+                    isLocked = false;
+                    User.Inventory.RemoveItem(itemToUse);
+                    return false;
+                    
+                }else if(Input == "no")
+                {
+                    return true;
+                }
+
+            }else if(!hasLockPick){
+   
+                Console.Clear();
+                Console.WriteLine("You do not have a lock pick to unlock this door");
+                Thread.Sleep(2000);
+                return true;
+            }
+
+        }else if (!isLocked)
+        {
+            return false;
+        }
+
+        return true;
+
+    }       
 }

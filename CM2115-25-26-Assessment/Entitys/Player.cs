@@ -11,47 +11,45 @@ using behaviours.attackbehaviours;
 using items;
 using Moons;
 
-
-
 namespace entitys.players;
-
 
 public class Player : Entity
 {
-    //Attributes
-    private static Player instance = null;
+    // Singleton player instance — ensures only one player exists in the game.
+    private static Player? instance = null;
 
+    // UI element that observes and displays the player's health.
     public HealthBar HealthBar = new HealthBar();
 
+    // Determines whether the player is still in the game loop.
     public bool isPlaying = true;
 
+    // Basic gameplay stats.
     public int EnemysKilled = 0;
-
     public int PuzzlesSolved = 0;
-
     public int ScrapValueCollected = 0;
 
+    // Inventory system and current room the player is located in.
     public Inventory Inventory { get; set; }
-
     public Room CurrentRoom { get; set; }
 
-
-    //Constructor
-    private Player(String name, int hp, Room currentRoom, Inventory inventory) : base(name, hp)
+    // Private constructor because Player is a singleton.
+    private Player(String name, int hp, Room currentRoom, Inventory inventory)
+        : base(name, hp)
     {
         this.Inventory = inventory;
         this.CurrentRoom = currentRoom;
     }
 
-
-    //Methods
-
+    // Creates or returns the single player instance.
+    // Handles username validation and starting values.
     public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("\nPlease enter a username! (Greater than 3 characters, fewer than 15): ");
-        String Username = Console.ReadLine();
+        String? Username = Console.ReadLine();
 
-        while(Username.Length<=3||Username.Length>=15)
+        // Simple username length validation loop.
+        while (Username.Length <= 3 || Username.Length >= 15)
         {
             Console.Clear();
             Console.WriteLine("Username must be longer than 3 characters, and shorter than 15");
@@ -59,6 +57,7 @@ public class Player : Entity
             Username = Console.ReadLine();
         }
 
+        // Only create the player once.
         if (instance == null)
         {
             instance = new Player(Username, 100, startRoom, new Inventory());
@@ -67,6 +66,8 @@ public class Player : Entity
         return instance;
     }
 
+    // Handles player movement between connected rooms.
+    // Prints available paths and performs a loading animation.
     public static void Move()
     {
         Console.WriteLine($"\nWhere would you like to move {instance.Name}?");
@@ -74,25 +75,37 @@ public class Player : Entity
         Console.WriteLine("-------------------------------");
         foreach (var room in instance.CurrentRoom.SurroundingRooms)
         {
+            // Shows available movement options.
             Console.WriteLine($"{room.Key} -> {room.Value.Name}");
         }
         Console.WriteLine("-------------------------------");
-        var Result = Console.ReadLine();
 
-        if (instance.CurrentRoom.SurroundingRooms.TryGetValue(Result, out Room nextRoom))
+        String? Input = Console.ReadLine();
+
+        // If the key exists, move to that room.
+        if (instance.CurrentRoom.SurroundingRooms.TryGetValue(Input, out Room? nextRoom))
         {
+
+            bool isRoomLocked = nextRoom.CheckForLock(instance);
+
+            if (isRoomLocked)
+            {
+                return;
+            }
+
             Console.Clear();
 
+            // Basic loading effect for feedback.
             var Loading = "Loading";
-
-            for(var i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 Console.WriteLine(Loading);
-                Loading+=".";
+                Loading += ".";
                 Thread.Sleep(500);
                 Console.Clear();
             }
-            instance.CurrentRoom = nextRoom; // move the player
+
+            instance.CurrentRoom = nextRoom;
             Console.Clear();
             Console.WriteLine($"You moved to {nextRoom.Name}.\n");
         }
@@ -102,11 +115,14 @@ public class Player : Entity
         }
     }
 
+    // Player uses a weapon's behaviour to attack the enemy in the current room.
     public void AttackEnemy(Item Weapon)
     {
         Weapon.ItemBehaviour.Use(CurrentRoom.Enemy);
     }
 
+    // Sells the player's scrap and ends the game.
+    // If the quota is met → win. Otherwise → fail.
     public void SellScrap(int quota)
     {
         Console.Clear();
@@ -118,38 +134,56 @@ public class Player : Entity
 
         if (Input == "yes")
         {
+            // Loading animation before result.
             var Loading = "Loading";
-
-            for(var i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 Console.WriteLine(Loading);
-                Loading+=".";
+                Loading += ".";
                 Thread.Sleep(500);
                 Console.Clear();
             }
 
+            // Compare collected scrap to quota.
             if (ScrapValueCollected >= quota)
             {
                 Console.WriteLine("Congratulations, you beat the quota, have a nice day!");
                 Thread.Sleep(2500);
-                isPlaying=false;
-            }else if(ScrapValueCollected < quota)
+                isPlaying = false;  // End game (success)
+                return;
+            }
+            else
             {
                 Console.Clear();
-                Console.WriteLine("You have no items to sell! Go into the warehouse to find some.");
+                Console.WriteLine("You did not meet the quota\n");
                 Thread.Sleep(2500);
                 Console.Clear();
+
+                // Ejecting animation for failure.
+                var Ejecting = "Ejecting";
+                for (var i = 0; i < 4; i++)
+                {
+                    Console.WriteLine(Ejecting);
+                    Ejecting += ".";
+                    Thread.Sleep(500);
+                    Console.Clear();
+                }
+
+                isPlaying = false;  // End game (failure)
                 return;
-            }         
-        }else if(Input == "no")
+            }
+        }
+        else if (Input == "no")
         {
+            // Player cancelled the scrap-selling action.
             Console.Clear();
             return;
         }
-
-  
     }
 
+    // Main per-room action loop for the player.
+    // Handles movement, picking up items, dropping items,
+    // encountering puzzles/enemies, and ship terminal use.
     public void CompleteAction(GameData gameData, Moon moon)
     {
         var CompletingActions = true;
@@ -159,76 +193,89 @@ public class Player : Entity
             bool ItemsInRoom = false;
             bool HasItems = false;
 
+            // Allows the room to trigger any encounters or puzzles.
             CurrentRoom.CheckForEnemy(instance);
             CurrentRoom.CheckForPuzzle(instance);
 
-            if (HP > 0)
+            // Only continue if player is alive and still playing.
+            if (HP > 0 && isPlaying == true)
             {
+                gameData.displayUIinfo(HealthBar, CurrentRoom);
+                Console.WriteLine($"What would you like to do next {instance.Name}?\n");
+                Thread.Sleep(500);
+
+                // Shows terminal option only if the player is in the ship.
+                bool inShip = moon.CheckIfInShip(instance);
+                if (inShip)
+                {
+                    Console.WriteLine("• Use ship terminal- Press [T]");
+                }
+
+                // Only show pickup option if items exist in the room.
+                if (CurrentRoom.Items.Count > 0)
+                {
+                    Console.WriteLine("• Equip an item in this room - Press [E]");
+                    ItemsInRoom = true;
+                }
+
+                Console.WriteLine("• Move to another room - Press [M]");
+
+                // Only show drop option if player has items.
+                if (Inventory.Items.Count > 0)
+                {
+                    Console.WriteLine("• Drop an item in this room - Press [D]");
+                    HasItems = true;
+                }
+
+                String RawInput = Console.ReadLine();
+                String Input = RawInput.Trim().ToLower();
+
+                // Action handling:
+                if (Input == "e" && ItemsInRoom)
+                {
                     gameData.displayUIinfo(HealthBar, CurrentRoom);
-                    Console.WriteLine($"What would you like to do next {instance.Name}?\n");
-                    Thread.Sleep(500);
-
-                    bool inShip = moon.CheckIfInShip(instance);
-
-                    if (inShip)
-                    {
-                        Console.WriteLine("• Use ship terminal- Press [T]");
-                    }
-
-                    if (CurrentRoom.Items.Count > 0)
-                    {
-                        Console.WriteLine("• Equip an item in this room - Press [E]");
-                        ItemsInRoom = true;
-                    }
-                    Console.WriteLine("• Move to another room - Press [M]");
-                    if(Inventory.Items.Count > 0)
-                    {
-                        Console.WriteLine("• Drop an item in this room - Press [D]");
-                        HasItems = true;
-                    }
-                    String RawInput = Console.ReadLine();
-                    String Input = RawInput.Trim().ToLower();
-
-                    if (Input == "e"&&ItemsInRoom)
-                    {
-                        gameData.displayUIinfo(HealthBar, CurrentRoom);
-                        CurrentRoom.PickUpItem(Inventory);
-                        Inventory.updateCollectedScrap(instance);
-                    }
-                    else if(Input == "m")
-                    {
-                        CompletingActions = false;
-                        gameData.displayUIinfo(HealthBar, CurrentRoom);
-                        Move();
-                    }
-                    else if(Input == "d"&&HasItems)
-                    {
-                        gameData.displayUIinfo(HealthBar, CurrentRoom);
-                        CurrentRoom.DropItem(Inventory);
-                        Inventory.updateCollectedScrap(instance);
-                    }
-                    else if(Input == "t")
-                    {
-                        gameData.GameDataPrompt();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please enter a valid input for an action");
-                        Thread.Sleep(1000);
-                    }               
-            }else if (HP <= 0)
+                    CurrentRoom.PickUpItem(Inventory);
+                    Inventory.updateCollectedScrap(instance);
+                }
+                else if (Input == "m")
+                {
+                    // Breaks the inner loop so the main loop calls Move().
+                    CompletingActions = false;
+                    gameData.displayUIinfo(HealthBar, CurrentRoom);
+                    Move();
+                }
+                else if (Input == "d" && HasItems)
+                {
+                    gameData.displayUIinfo(HealthBar, CurrentRoom);
+                    CurrentRoom.DropItem(Inventory);
+                    Inventory.updateCollectedScrap(instance);
+                }
+                else if (Input == "t")
+                {
+                    gameData.PromptTerminal();
+                }
+                else
+                {
+                    // Invalid inputs redisplay UI and warn the player.
+                    Console.Clear();
+                    gameData.displayUIinfo(HealthBar, CurrentRoom);
+                    Console.WriteLine("Please enter a valid input for an action");
+                    Thread.Sleep(2000);
+                }
+            }
+            else if (HP <= 0 || isPlaying == false)
             {
+                // Death or game-ending condition.
                 Console.Clear();
                 Console.WriteLine("You died, thanks for playing!");
                 Thread.Sleep(3000);
                 isPlaying = false;
                 return;
             }
-
         }
-
     }
- 
+
+    // Simple stat display methods.
     public void DisplayPuzzlesSolved()
     {
         Console.WriteLine("Puzzles Solved:\n");
@@ -238,12 +285,13 @@ public class Player : Entity
     public void DisplayScrapValueCollected()
     {
         Console.WriteLine("Scrap Value Collected:\n");
-        Console.WriteLine(ScrapValueCollected);        
+        Console.WriteLine(ScrapValueCollected);
     }
 
     public void DisplayEnemysKilled()
     {
+        // Note: text label is incorrect (should say "Enemies Killed").
         Console.WriteLine("Puzzles Solved:\n");
-        Console.WriteLine(EnemysKilled);       
+        Console.WriteLine(EnemysKilled);
     }
 }

@@ -78,13 +78,13 @@ public class Assurance : IMoonBehaviour
                 "Main WareHouse Entrance",
                 new List<Item> { Cog, Pipe },
                 "Large cargo doors dominate the room. Forklifts sit abandoned, and scattered scrap covers the floor."
-            ).Build());
+            ).addLock().Build());
 
             WareHouse.AddRoom("1,2", new RoomBuilder().AddMainData(
                 "Logistics Office",
                 new List<Item> { SignPost },
                 "Clipboards, terminals, and scattered papers clutter the desks. The smell of mold lingers."
-            ).AddEnemy(Thumper).Build());
+            ).AddPuzzle(SingleAnswer1).Build());
 
             WareHouse.AddRoom("-1,3", new RoomBuilder().AddMainData(
                 "Observation Control Room",
@@ -102,7 +102,7 @@ public class Assurance : IMoonBehaviour
                 "Security Monitoring Room",
                 new List<Item> { Lockpicker },
                 "Old security screens flicker with static. Lockers stand open, their contents missing."
-            ).AddPuzzle(SingleAnswer2).Build());
+            ).AddPuzzle(SingleAnswer2).addLock().Build());
 
             WareHouse.AddRoom("-1,4", new RoomBuilder().AddMainData(
                 "Lower Cargo Storage",
@@ -120,7 +120,7 @@ public class Assurance : IMoonBehaviour
                 "Lower Management Office",
                 new List<Item> {  },
                 "Old documents lie scattered across the floor. A broken desk lamp flickers intermittently."
-            ).AddEnemy(Nutcracker).Build());
+            ).AddEnemy(Nutcracker).addLock().Build());
 
             //Add surrounding rooms so they are visible
             Ship.Rooms["0,0"].SurroundingRooms = new Dictionary<string, Room>{
