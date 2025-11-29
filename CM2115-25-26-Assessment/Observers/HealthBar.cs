@@ -2,7 +2,7 @@ using interfaces.Observer;
 
 namespace Observers.HealthBar;
 
-public class HealthBar : IObserver
+public class HealthBar : IHealthBar
 {
 
     //attributes
