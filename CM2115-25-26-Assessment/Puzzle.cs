@@ -2,13 +2,14 @@ using System;
 using System.Runtime.CompilerServices;
 using entitys.players;
 using interfaces.puzzlebehaviours;
+using interfaces.puzzles;
 
 namespace puzzles;
 
-public class Puzzle
+public class Puzzle : IPuzzle
 {
     // Tracks whether the puzzle has been solved.
-    public bool isSolved;
+    public bool isSolved { get; set; }
 
     // Behaviour interface allowing different types of puzzles.
     // Uses Strategy Pattern to delegate puzzle logic (e.g., riddle, lock, mini-game).

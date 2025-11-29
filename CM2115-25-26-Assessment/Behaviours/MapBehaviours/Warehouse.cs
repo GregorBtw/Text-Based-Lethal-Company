@@ -6,6 +6,6 @@ public class WareHouse : IMapBehaviour
 {
     public void Move()
     {
-        //Implementation of movement in warehouse
+        Console.WriteLine("You moved in the Warehouse!");
     }
 }

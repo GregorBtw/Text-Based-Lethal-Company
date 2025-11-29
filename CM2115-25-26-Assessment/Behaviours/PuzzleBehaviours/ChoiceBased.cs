@@ -2,10 +2,12 @@ using System.Collections.Concurrent;
 using System;
 using interfaces.puzzlebehaviours;
 using entitys.players;
+using interfaces.puzzleInfo;
+using interfaces.puzzleOptions;
 
 namespace behaviours.puzzlebehaviours;
 
-public class ChoiceBased : IPuzzleBehaviours
+public class ChoiceBased : IPuzzleBehaviours, IPuzzleInfo, IPuzzleOptions
 {
     // Attributes related to the puzzle, such as the question, answer, and options
     public String Description { get; set; }

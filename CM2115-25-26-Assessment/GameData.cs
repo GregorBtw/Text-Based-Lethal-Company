@@ -5,9 +5,8 @@ using entitys.players;
 using interfaces.GameData;
 using Observers.HealthBar;
 using rooms;
-using entitys;
 using entitys.Creatures;
-using inventory;
+
 
 namespace Game_Data;
 
@@ -20,7 +19,7 @@ public class GameData : IGameData
     public int Quota { get; set; }
 
     // Reference to the player for terminal actions and UI.
-    public Player Player;
+    public Player Player { get; set; }
 
     // Private constructor: part of the Singleton pattern.
     private GameData(int quota, Player player)

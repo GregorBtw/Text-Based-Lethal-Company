@@ -6,6 +6,6 @@ public class Ship : IMapBehaviour
 {
     public void Move()
     {
-         
+         Console.WriteLine("You moved in the ship!");
     }
 }

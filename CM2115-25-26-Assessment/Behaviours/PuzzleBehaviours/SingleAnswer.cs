@@ -2,10 +2,11 @@ using System.Collections.Concurrent;
 using System;
 using interfaces.puzzlebehaviours;
 using entitys.players;
+using interfaces.puzzleInfo;
 
 namespace behaviours.puzzlebehaviours;
 
-public class SingleAnswer : IPuzzleBehaviours
+public class SingleAnswer : IPuzzleBehaviours, IPuzzleInfo
 {
     // Attributes for the puzzle, including description, question, and correct answer
     public string Description { get; set; }  // A short description of the puzzle
