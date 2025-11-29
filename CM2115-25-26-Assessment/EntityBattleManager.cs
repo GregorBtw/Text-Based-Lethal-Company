@@ -44,7 +44,7 @@ public class EntityBattleManager
         User.Inventory.DisplayWeapons();
 
         String? Str = Console.ReadLine();
-        String Input = Str.Trim().ToLower();
+        String Input = (Str ?? "").Trim().ToLower();
         Item? Weapon = User.Inventory.Items.FirstOrDefault(item => item.Name.ToLower() == Input);
 
         while (User.HP > 0 && enemy.HP > 0)
@@ -53,7 +53,7 @@ public class EntityBattleManager
             Console.WriteLine("\nPress any key to attack: ");
             Console.ReadKey();
 
-            User.AttackEnemy(Weapon);
+            User.AttackEnemy(Weapon!);
             Thread.Sleep(2500);
             Console.Clear();
 
@@ -81,7 +81,7 @@ public class EntityBattleManager
         }
 
         Console.Clear();
-        Weapon.Use(User);
+        Weapon!.Use(User);
         User.Inventory.RemoveItem(Weapon);
     }
 
