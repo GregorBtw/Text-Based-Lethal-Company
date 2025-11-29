@@ -45,7 +45,7 @@ public class SingleAnswer : IPuzzleBehaviours
             // If the answer is incorrect, display the correct answer and apply a penalty
             Console.WriteLine($"Incorrect, the correct answer was '{Answer}'");
             Console.WriteLine("You take 10 damage and pass through into the room");
-            User.SetHp(User.HP - 10);  // Apply 10 damage to the player's health
+            User.SetHp(User.HP - 20);  // Apply 10 damage to the player's health
             Thread.Sleep(2000);        // Wait for 2 seconds before proceeding
         }
 

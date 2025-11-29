@@ -81,7 +81,7 @@ public class MemoryBased : IPuzzleBehaviours
                     // If incorrect, show the penalty and exit the puzzle
                     Console.WriteLine("Incorrect sequence");
                     Console.WriteLine("You take 10 damage and pass through into the room");
-                    User.SetHp(User.HP - 10); // Apply penalty to health
+                    User.SetHp(User.HP - 20); // Apply penalty to health
                     Thread.Sleep(2000);
                     return;
                 }

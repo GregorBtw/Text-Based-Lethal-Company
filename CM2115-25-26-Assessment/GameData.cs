@@ -85,6 +85,7 @@ public class GameData : IGameData
     {
         Console.Clear();
         healthBar.DisplayHealthBar();
+        Player.Inventory.DisplayItems();
         CurrentRoom.DisplayCurrentRoomInformation();
     }
 

@@ -61,7 +61,7 @@ public class ChoiceBased : IPuzzleBehaviours
             // Incorrect answer gives penalty and displays the correct answer
             Console.WriteLine($"Incorrect, the correct answer was '{Answer}'");
             Console.WriteLine("You take 10 damage and pass through into the room");
-            User.SetHp(User.HP - 10); // Apply penalty to health
+            User.SetHp(User.HP - 20); // Apply penalty to health
             Thread.Sleep(2000);
         }
 

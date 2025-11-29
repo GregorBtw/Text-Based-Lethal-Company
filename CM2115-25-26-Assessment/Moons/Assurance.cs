@@ -55,7 +55,7 @@ public class Assurance : IMoonBehaviour
 
             Ship.AddRoom("0,0", new RoomBuilder().AddMainData(
                 "Ship Control Compartment",
-                new List<Item> {  },
+                new List<Item> { Lockpicker },
                 "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
             ).Build());
 
