@@ -13,7 +13,7 @@ using Moons;
 
 namespace entitys.players;
 
-public class Player : Entity
+public class Player : Entity 
 {
     // Singleton player instance — ensures only one player exists in the game.
     private static Player? instance = null;
@@ -39,7 +39,7 @@ public class Player : Entity
     }
 
     // Creates or returns the single player instance.
-    // Handles username validation and starting values.
+    // Handles username validation and starting values.  
     public static Player Initialise(Room startRoom)
     {
         Console.WriteLine("\nPlease enter a username! (Greater than 3 characters, fewer than 15): ");
@@ -240,7 +240,7 @@ public class Player : Entity
                 {
                     gameData.displayUIinfo(HealthBar, CurrentRoom);
                     CurrentRoom.PickUpItem(Inventory);
-                    Inventory.updateCollectedScrap(instance);
+                    Inventory.UpdateCollectedScrap(instance);
                 }
                 else if (Input == "m")
                 {
@@ -253,7 +253,7 @@ public class Player : Entity
                 {
                     gameData.displayUIinfo(HealthBar, CurrentRoom);
                     CurrentRoom.DropItem(Inventory);
-                    Inventory.updateCollectedScrap(instance);
+                    Inventory.UpdateCollectedScrap(instance);
                 }
                 else if (Input == "t")
                 {

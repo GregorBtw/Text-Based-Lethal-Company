@@ -2,13 +2,14 @@ using System;
 using items;
 using behaviours.itembehaviours;
 using entitys.players;
+using Interfaces.IInventory;
 
 namespace inventory;
 
-public class Inventory
+public class Inventory : IInventory
 {
     // Holds all items the player is carrying (max size is enforced logically).
-    public List<Item> Items;
+    public List<Item> Items { get; set; }
 
     // Initializes inventory with capacity of 4 items.
     public Inventory()
@@ -71,18 +72,19 @@ public class Inventory
     }
 
     // Updates player's total scrap value based on all ValueItems they carry.
-    public void updateCollectedScrap(Player User)
+    public void UpdateCollectedScrap(Player user)
     {
         for (var i = 0; i < Items.Count; i++)
         {
             if (Items[i].ItemBehaviour is ValueItem)
             {
-                User.ScrapValueCollected += Items[i].Value;
+                user.ScrapValueCollected += Items[i].Value;
             }
         }
 
         Console.WriteLine("\n");
     }
+
 
     public bool CheckForLockpick()
     {
