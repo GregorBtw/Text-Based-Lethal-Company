@@ -3,13 +3,14 @@ using rooms;
 using interfaces.attackbehaviours;
 using interfaces.Observer;
 using Observers.HealthBar;
+using interfaces.Entitys;
 
 namespace entitys;
 
-public class Entity
+public class Entity : IEntity
 {
     // Basic identifying name for any entity (player, creature, etc.).
-    public String Name;
+    public String Name { get; set; }
 
     // Each entity has its own health bar observer for UI updates.
     public HealthBar HealthBar = new HealthBar();
@@ -18,7 +19,7 @@ public class Entity
     public List<IObserver> Observers = new List<IObserver>();
 
     // Current hit points (health value).
-    public int HP;
+    public int HP { get; set; }
 
     // Base constructor for all entities.
     // Sets initial name and health.
