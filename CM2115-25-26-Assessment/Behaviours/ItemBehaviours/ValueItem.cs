@@ -6,7 +6,7 @@ namespace behaviours.itembehaviours;
 public class ValueItem : IItemBehaviour
 {
     // Use method doesn't do anything, as it's more of a collectible value item
-    public void Use(Entity target)
+    public void Use(Entity target, int Multiplier)
     {
       
     }

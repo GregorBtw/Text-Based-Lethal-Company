@@ -78,7 +78,7 @@ public class Assurance : IMoonBehaviour
                 "Main WareHouse Entrance",
                 new List<Item> { Cog, Pipe },
                 "Large cargo doors dominate the room. Forklifts sit abandoned, and scattered scrap covers the floor."
-            ).addLock().Build());
+            ).Build());
 
             WareHouse.AddRoom("1,2", new RoomBuilder().AddMainData(
                 "Logistics Office",

@@ -33,7 +33,7 @@ public class Item
     // Placeholder for using an item directly (not used in your current design).
     public void Use(Player User)
     {
-        ItemBehaviour.Use(User);
+        ItemBehaviour.Use(User, 1);
         Console.WriteLine($"\n{Name}, it is now broken");
         Thread.Sleep(3000);
     }

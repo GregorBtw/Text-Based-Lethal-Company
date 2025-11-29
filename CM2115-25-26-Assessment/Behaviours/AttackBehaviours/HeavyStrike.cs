@@ -10,9 +10,9 @@ public class HeavyStrike : IAttackBehaviour
     public int DamageAmount = 20;
 
     //Methods
-    public void DealDamage(Entity target)
+    public void DealDamage(Entity target, int Multiplier)
     {
         Console.WriteLine("A heavy strike has been landed");
-        target.SetHp(target.HP-DamageAmount);
+        target.SetHp(target.HP-(DamageAmount*Multiplier));
     }
 }

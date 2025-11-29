@@ -7,7 +7,7 @@ public interface IItemBehaviour
 {
     //Method signature
 
-    void Use(Entity target);
+    void Use(Entity target, int Multiplier);
 
     void Equip();
 }

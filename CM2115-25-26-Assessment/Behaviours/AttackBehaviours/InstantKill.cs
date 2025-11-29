@@ -11,9 +11,9 @@ public class InstantKill : IAttackBehaviour
     public int DamageAmount = 100;
 
     //Methods
-    public void DealDamage(Entity target)
+    public void DealDamage(Entity target, int Multiplier)
     {
         Console.WriteLine("You where instantly killed");
-        target.SetHp(target.HP-DamageAmount);
+        target.SetHp(target.HP-(DamageAmount*Multiplier));
     }
 }

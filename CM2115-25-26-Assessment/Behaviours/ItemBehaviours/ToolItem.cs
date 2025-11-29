@@ -8,7 +8,7 @@ namespace behaviours.itembehaviours;
 public class ToolItem : IItemBehaviour
 {
     // Use method doesn't do anything currently, can be expanded for tool-specific actions
-    public void Use(Entity target)
+    public void Use(Entity target, int Multiplier)
     {
         Console.WriteLine("You have used a tool");
     }

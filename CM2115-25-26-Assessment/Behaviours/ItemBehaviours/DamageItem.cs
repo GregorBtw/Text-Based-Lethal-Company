@@ -17,9 +17,9 @@ public class DamageItem : IItemBehaviour
     }
 
     // Use method triggers the attack behavior, dealing damage to the target entity
-    public void Use(Entity target)
+    public void Use(Entity target, int Multiplier)
     {
-        AttackBehaviour.DealDamage(target);
+        AttackBehaviour.DealDamage(target, Multiplier);
     }
 
     // Equip method gives feedback to the player when they pick up a weapon

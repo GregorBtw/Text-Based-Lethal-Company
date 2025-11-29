@@ -11,9 +11,9 @@ public class Shoot : IAttackBehaviour
     public int DamageAmount = 30;
 
     //Methods
-    public void DealDamage(Entity target)
+    public void DealDamage(Entity target, int Multiplier)
     {
         Console.WriteLine("A shot was fired with a gun");
-        target.SetHp(target.HP-DamageAmount);
+        target.SetHp(target.HP-(DamageAmount*Multiplier));
     }
 }

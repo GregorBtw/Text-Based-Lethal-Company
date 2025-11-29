@@ -80,7 +80,12 @@ public class Player : Entity
         }
         Console.WriteLine("-------------------------------");
 
-        String? Input = Console.ReadLine();
+        string? Str = Console.ReadLine();
+
+        string firstPart = Str.Substring(0,1).ToUpper();     
+        string secondPart = Str.Substring(1).ToLower();     
+
+        string Input = firstPart + secondPart;
 
         // If the key exists, move to that room.
         if (instance.CurrentRoom.SurroundingRooms.TryGetValue(Input, out Room? nextRoom))
@@ -89,7 +94,7 @@ public class Player : Entity
             bool isRoomLocked = nextRoom.CheckForLock(instance);
 
             if (isRoomLocked)
-            {
+            { 
                 return;
             }
 
@@ -112,13 +117,14 @@ public class Player : Entity
         else
         {
             Console.WriteLine("Invalid choice, please try again.");
+            Thread.Sleep(2000);
         }
     }
 
     // Player uses a weapon's behaviour to attack the enemy in the current room.
     public void AttackEnemy(Item Weapon)
     {
-        Weapon.ItemBehaviour.Use(CurrentRoom.Enemy);
+        Weapon.ItemBehaviour.Use(CurrentRoom.Enemy, 1);
     }
 
     // Sells the player's scrap and ends the game.

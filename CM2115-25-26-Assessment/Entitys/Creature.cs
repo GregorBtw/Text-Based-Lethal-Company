@@ -26,9 +26,9 @@ public class Creature : Entity
     }
 
     // Makes the creature attack the player using its behaviour object.
-    public void AttackPlayer(Player User)
+    public void AttackPlayer(Player User,int Multiplier)
     {
         Console.WriteLine($"{Name} is now attacking you");
-        AttackBehaviour.DealDamage(User);
+        AttackBehaviour.DealDamage(User, Multiplier);
     }
 }
