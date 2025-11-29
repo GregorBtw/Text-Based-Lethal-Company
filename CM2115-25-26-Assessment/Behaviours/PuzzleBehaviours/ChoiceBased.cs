@@ -39,14 +39,14 @@ public class ChoiceBased : IPuzzleBehaviours
         // Prompt user for input (answer choice)
         Console.WriteLine("\nPlease enter your answer: \n");
         String? rawInput = Console.ReadLine();
-        UserAnswer = rawInput.ToUpper();
+        UserAnswer = (rawInput ?? "").ToUpper();
 
         // Ensuring valid answer input
         while (UserAnswer != "A" && UserAnswer != "B" && UserAnswer != "C")
         {
             Console.WriteLine("Please enter a valid answer: \n");
             rawInput = Console.ReadLine();
-            UserAnswer = rawInput.ToUpper();
+            UserAnswer = (rawInput ?? "").ToUpper();
         }
 
         // Checking if the player's answer matches the correct answer

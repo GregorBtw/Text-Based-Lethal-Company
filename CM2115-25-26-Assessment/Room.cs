@@ -23,12 +23,12 @@ public class Room
     // Initializes a room using a RoomBuilder (Builder Pattern)
     public Room(RoomBuilder Builder)
     {
-        this.Name = Builder.Name;
-        this.Items = Builder.Items;
-        this.Information = Builder.Information;
-        this.SurroundingRooms = Builder.SurroundingRooms;
-        this.Enemy = Builder.Enemy;
-        this.Puzzle = Builder.Puzzle;
+        this.Name = Builder.Name!;
+        this.Items = Builder.Items!;
+        this.Information = Builder.Information!;
+        this.SurroundingRooms = Builder.SurroundingRooms!;
+        this.Enemy = Builder.Enemy!;
+        this.Puzzle = Builder.Puzzle!;
         this.isLocked = Builder.isLocked;
     }
 
@@ -159,12 +159,12 @@ public class Room
             {
                 Console.WriteLine("You have a lock pick to unlock this door, would you like to? 'yes' 'no': ");
                 String? Str = Console.ReadLine();
-                String Input = Str.Trim().ToLower();
+                String Input = (Str ?? "").Trim().ToLower();
 
                 if (Input == "yes")
                 {
                     var itemToUse = User.Inventory.Items.FirstOrDefault(item => item.Name.ToLower() == "lockpicker");
-                    itemToUse.Use(User);
+                    itemToUse!.Use(User);
                     Console.WriteLine("You unlocked the door");
                     isLocked = false;
                     User.Inventory.RemoveItem(itemToUse);

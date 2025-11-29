@@ -29,14 +29,14 @@ public class MemoryBased : IPuzzleBehaviours
 
         Console.WriteLine("Please type 'Start' to begin");
         String? rawInput = Console.ReadLine();
-        String input = rawInput.ToLower();
+        String input = (rawInput ?? "").ToLower();
 
         // Wait for user to type 'Start' before beginning the sequence
         while (input != "start")
         {
             Console.WriteLine("Please type 'Start' to begin");
             rawInput = Console.ReadLine();
-            input = rawInput.ToLower();
+            input = (rawInput ?? "").ToLower();
         }
 
         // If 'Start' is entered, begin showing the sequence
@@ -56,7 +56,7 @@ public class MemoryBased : IPuzzleBehaviours
 
                 Console.WriteLine("Please enter the sequence that was shown, leaving a , between characters: ");
                 String? SequenceInput = Console.ReadLine();
-                string result = new string(SequenceInput.Where(c => !charsToRemove.Contains(c)).ToArray());
+                string result = new string((SequenceInput ?? "").Where(c => !charsToRemove.Contains(c)).ToArray());
 
                 // Compare the player's input to the sequence
                 for (var chara = 0; chara < result.Length; chara++)

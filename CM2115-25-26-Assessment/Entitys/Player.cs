@@ -18,9 +18,6 @@ public class Player : Entity
     // Singleton player instance — ensures only one player exists in the game.
     private static Player? instance = null;
 
-    // UI element that observes and displays the player's health.
-    public HealthBar HealthBar = new HealthBar();
-
     // Determines whether the player is still in the game loop.
     public bool isPlaying = true;
 
@@ -49,7 +46,7 @@ public class Player : Entity
         String? Username = Console.ReadLine();
 
         // Simple username length validation loop.
-        while (Username.Length <= 3 || Username.Length >= 15)
+        while ((Username ?? "").Length <= 3 || (Username ?? "").Length >= 15)
         {
             Console.Clear();
             Console.WriteLine("Username must be longer than 3 characters, and shorter than 15");
@@ -57,10 +54,12 @@ public class Player : Entity
             Username = Console.ReadLine();
         }
 
+        string validUsername = Username!;
+
         // Only create the player once.
         if (instance == null)
         {
-            instance = new Player(Username, 100, startRoom, new Inventory());
+            instance = new Player(validUsername, 100, startRoom, new Inventory());
         }
 
         return instance;
@@ -70,7 +69,7 @@ public class Player : Entity
     // Prints available paths and performs a loading animation.
     public static void Move()
     {
-        Console.WriteLine($"\nWhere would you like to move {instance.Name}?");
+        Console.WriteLine($"\nWhere would you like to move {instance!.Name}?");
 
         Console.WriteLine("-------------------------------");
         foreach (var room in instance.CurrentRoom.SurroundingRooms)
@@ -82,8 +81,8 @@ public class Player : Entity
 
         string? Str = Console.ReadLine();
 
-        string firstPart = Str.Substring(0,1).ToUpper();     
-        string secondPart = Str.Substring(1).ToLower();     
+        string firstPart = (Str ?? "").Substring(0,1).ToUpper();     
+        string secondPart = (Str ?? "").Substring(1).ToLower();     
 
         string Input = firstPart + secondPart;
 
@@ -136,7 +135,7 @@ public class Player : Entity
         Console.WriteLine("Are you sure you want to sell your scrap, 'yes' or 'no'?\n");
         Console.WriteLine("Once you do, you can not go back into the Warehouse");
         String? Str = Console.ReadLine();
-        String? Input = Str.ToLower();
+        String? Input = (Str ?? "").ToLower();
 
         if (Input == "yes")
         {
@@ -200,14 +199,14 @@ public class Player : Entity
             bool HasItems = false;
 
             // Allows the room to trigger any encounters or puzzles.
-            CurrentRoom.CheckForEnemy(instance);
-            CurrentRoom.CheckForPuzzle(instance);
+            CurrentRoom.CheckForEnemy(instance!);
+            CurrentRoom.CheckForPuzzle(instance!);
 
             // Only continue if player is alive and still playing.
             if (HP > 0 && isPlaying == true)
             {
                 gameData.displayUIinfo(HealthBar, CurrentRoom);
-                Console.WriteLine($"What would you like to do next {instance.Name}?\n");
+                Console.WriteLine($"What would you like to do next {instance!.Name}?\n");
                 Thread.Sleep(500);
 
                 // Shows terminal option only if the player is in the ship.
@@ -234,7 +233,7 @@ public class Player : Entity
                 }
 
                 String RawInput = Console.ReadLine();
-                String Input = RawInput.Trim().ToLower();
+                String Input = (RawInput ?? "").Trim().ToLower();
 
                 // Action handling:
                 if (Input == "e" && ItemsInRoom)

@@ -30,7 +30,7 @@ public class SingleAnswer : IPuzzleBehaviours
         // Prompt the player for their answer
         Console.WriteLine("Please enter the answer: ");
         String? Str = Console.ReadLine();   // Read the player's input
-        String input = Str.ToLower();       // Convert the input to lowercase for case-insensitivity
+        String input = (Str ?? "").ToLower();       // Convert the input to lowercase for case-insensitivity
 
         // Check if the player's input matches the correct answer
         if (input == Answer)

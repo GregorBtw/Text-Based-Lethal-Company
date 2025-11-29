@@ -68,13 +68,13 @@ public class GameData : IGameData
         // Wait until the user types "read" to continue.
         Console.WriteLine("When you are ready to begin, Please enter 'Read': ");
         String? Str = Console.ReadLine();
-        String? Input = Str.ToLower();
+        String? Input = (Str ?? "").ToLower();
 
         while (Input != "read")
         {
             Console.WriteLine("Please enter 'Read' to begin: ");
             Str = Console.ReadLine();
-            Input = Str.ToLower();
+            Input = (Str ?? "").ToLower();
         }
 
         Console.Clear();
@@ -136,7 +136,7 @@ public class GameData : IGameData
             Console.WriteLine("\nOr type 'Exit' to leave the terminal\n");
 
             String? Str = Console.ReadLine();
-            String? Input = Str.ToLower();
+            String? Input = (Str ?? "").ToLower();
 
             // Executes terminal command if valid.
             if (Commands.TryGetValue(Input, out Action? method))
@@ -153,13 +153,13 @@ public class GameData : IGameData
                 // Ask if they want to run another command.
                 Console.WriteLine("\nIf you would like to enter another command, type 'yes', and 'exit' to leave the terminal");
                 String? optionStr = Console.ReadLine();
-                String? optionInput = optionStr.ToLower();
+                String? optionInput = (optionStr ?? "").ToLower();
 
                 while (optionInput != "yes" && optionInput != "exit")
                 {
                     Console.WriteLine("Please enter either 'yes' or 'exit'");
                     optionStr = Console.ReadLine();
-                    optionInput = optionStr.ToLower();
+                    optionInput = (optionStr ?? "").ToLower();
                 }
 
                 if (optionInput == "exit")
