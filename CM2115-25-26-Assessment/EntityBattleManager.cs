@@ -40,12 +40,24 @@ public class EntityBattleManager
         }
 
         // Ask the player which weapon they want to use
-        Console.WriteLine("What item would you like to use to attack?: \n");
-        User.Inventory.DisplayWeapons();
+        Item? Weapon = null;
+        while (Weapon == null)
+        {
+            Console.Clear();
+            Console.WriteLine("What item would you like to use to attack?: \n");
+            User.Inventory.DisplayWeapons();
 
-        String? Str = Console.ReadLine();
-        String Input = (Str ?? "").Trim().ToLower();
-        Item? Weapon = User.Inventory.Items.FirstOrDefault(item => item.Name.ToLower() == Input);
+            string? Str = Console.ReadLine();
+            string Input = (Str ?? "").Trim().ToLower();
+
+            Weapon = User.Inventory.Items.FirstOrDefault(item => item.Name.ToLower() == Input && item.ItemBehaviour is DamageItem);
+
+            if (Weapon == null)
+            {
+                Console.WriteLine("Invalid weapon selected. Please choose a valid weapon.\n");
+                Thread.Sleep(2000);
+            }
+        }
 
         while (User.HP > 0 && enemy.HP > 0)
         {
@@ -53,7 +65,7 @@ public class EntityBattleManager
             Console.WriteLine("\nPress any key to attack: ");
             Console.ReadKey();
 
-            User.AttackEnemy(Weapon!);
+            User.AttackEnemy(Weapon);
             Thread.Sleep(2500);
             Console.Clear();
 
@@ -81,8 +93,7 @@ public class EntityBattleManager
         }
 
         Console.Clear();
-        Weapon!.Use(User);
         User.Inventory.RemoveItem(Weapon);
     }
-
 }
+

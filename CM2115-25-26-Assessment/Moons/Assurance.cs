@@ -18,17 +18,17 @@ public class Assurance : IMoonBehaviour
 
            //Initialise Value Items
            Item Cog = new Item("cog", 45, new ValueItem(), "A solid, rust-flecked gear used in old machinery. Still sturdy enough to be useful in repairs or crafting.");
-           Item LargeAxle = new Item("large axle", 90, new ValueItem(), "A thick metal axle, heavy and worn. Essential for restoring larger mechanical systems.");
-           Item EnginePart = new Item("engine part", 85, new ValueItem(), "A dense chunk of engine hardware—wires, plates, and connectors fused together. Looks critical for powering something important.");
+           Item LargeAxle = new Item("large axle", 45, new ValueItem(), "A thick metal axle, heavy and worn. Essential for restoring larger mechanical systems.");
+           Item EnginePart = new Item("engine part", 50, new ValueItem(), "A dense chunk of engine hardware—wires, plates, and connectors fused together. Looks critical for powering something important.");
            Item MetalSheet = new Item("bent metal sheet", 35, new ValueItem(), "A warped metal panel pried off of a ruined structure. Not pretty, but useful for patching or makeshift construction.");
 
            //Initialise Tool Items
-           Item Lockpicker = new Item("lockpicker", 90, new ToolItem(), "A slim metal toolkit for bypassing old locks. Fragile, but invaluable when a door stands between you and survival.");
+           Item Lockpicker = new Item("lockpicker", 0, new ToolItem(), "A slim metal toolkit for bypassing old locks. Fragile, but invaluable when a door stands between you and survival.");
 
            //Initialise Damage Items
-           Item SignPost = new Item("stop sign", 90, new DamageItem(new Strike()), "A battered stop sign on a broken pole. Heavy, wide, and surprisingly effective when swung with both hands.");
-           Item Pipe = new Item("metal pipe", 55, new DamageItem(new HeavyStrike()), "A section of steel pipe, cold and dense. Delivers brutal, crushing strikes.");
-           Item ShotGun = new Item("shot gun", 100, new DamageItem(new Shoot()), "An old, sawed-off shotgun. Loud, powerful, and devastating at close range.");
+           Item SignPost = new Item("stop sign", 0, new DamageItem(new Strike()), "A battered stop sign on a broken pole. Heavy, wide, and surprisingly effective when swung with both hands.");
+           Item Pipe = new Item("pipe", 0, new DamageItem(new HeavyStrike()), "A section of steel pipe, cold and dense. Delivers brutal, crushing strikes.");
+           Item ShotGun = new Item("shot gun", 0, new DamageItem(new Shoot()), "An old, sawed-off shotgun. Loud, powerful, and devastating at close range.");
 
            //Initialise Enemys
            Creature Thumper = new Creature("thumper", 30, new HeavyStrike(), "A hulking creature with distorted limbs that slam into the ground with bone-cracking force. Slow but terrifyingly strong.");
@@ -55,7 +55,7 @@ public class Assurance : IMoonBehaviour
 
             Ship.AddRoom("0,0", new RoomBuilder().AddMainData(
                 "Ship Control Compartment",
-                new List<Item> { Lockpicker },
+                new List<Item> {  },
                 "The shuttle’s engine hums steadily. Loose wiring and blinking panels line the walls."
             ).Build());
 
@@ -84,7 +84,7 @@ public class Assurance : IMoonBehaviour
                 "Logistics Office",
                 new List<Item> { SignPost },
                 "Clipboards, terminals, and scattered papers clutter the desks. The smell of mold lingers."
-            ).AddPuzzle(SingleAnswer1).Build());
+            ).AddEnemy(Thumper).Build());
 
             WareHouse.AddRoom("-1,3", new RoomBuilder().AddMainData(
                 "Observation Control Room",
@@ -96,7 +96,7 @@ public class Assurance : IMoonBehaviour
                 "Maintenance Workshop",
                 new List<Item> { EnginePart },
                 "Broken tools and abandoned machinery fill the benches. Deep scratches line the metal cabinets."
-            ).AddEnemy(Bracken).Build());
+            ).AddEnemy(Bracken).addLock().Build());
 
             WareHouse.AddRoom("1,3", new RoomBuilder().AddMainData(
                 "Security Monitoring Room",

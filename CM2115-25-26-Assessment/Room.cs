@@ -79,7 +79,7 @@ public class Room : IRoom
 
             inventory.AddItem(itemToPickUp);
             Items.Remove(itemToPickUp); 
-            Console.WriteLine($"You have picked up: {itemToPickUp.Name}");
+            itemToPickUp.ItemBehaviour.Equip();
             Thread.Sleep(1500); 
         }
         else
