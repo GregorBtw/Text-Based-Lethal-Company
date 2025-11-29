@@ -2,7 +2,7 @@ using System;
 using items;
 using behaviours.itembehaviours;
 using entitys.players;
-using Interfaces.IInventory;
+using Interfaces.Inventory;
 
 namespace inventory;
 

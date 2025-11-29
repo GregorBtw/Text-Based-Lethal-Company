@@ -9,10 +9,10 @@ namespace items;
 public class Item
 {
     // Item name shown to the player.
-    public String Name;
+    public String Name { get; set; }
 
     // Scrap value or item worth (used for quota calculation).
-    public int Value;
+    public int Value { get; set; }
 
     // Behaviour interface allowing different item types (weapons, scrap, etc.).
     // Implements the Strategy Pattern to give items custom functionality.

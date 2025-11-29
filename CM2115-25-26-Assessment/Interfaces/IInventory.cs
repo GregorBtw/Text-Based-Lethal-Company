@@ -1,7 +1,7 @@
 using items;
 using entitys.players;
 
-namespace Interfaces.IInventory
+namespace Interfaces.Inventory
 
 {
     public interface IInventory
