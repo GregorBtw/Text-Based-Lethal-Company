@@ -22,7 +22,7 @@ public class RoomBuilder
     // --- Builder Methods ---
     
     // Sets the basic room data: name, items, description
-    public RoomBuilder AddMainData(string name, List<Item> items, string information)
+    public RoomBuilder AddMainData(String name, List<Item> items, string information)
     {
         this.Name = name;
         this.Items = items;

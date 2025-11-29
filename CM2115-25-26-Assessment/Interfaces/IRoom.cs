@@ -1,21 +1,25 @@
 using System;
 using rooms;
 using items;
+using entitys.players;
+using inventory;
 
 namespace interfaces.room;
 
-public interface IRoom
-{
-    //Attributes
-    String Name { get; set; }
+    public interface IRoom
+    {
+        // Properties
+        string Name { get; set; }
+        List<Item> Items { get; set; }
+        string Information { get; set; }
+        Dictionary<String, Room> SurroundingRooms { get; set; }
+        bool isLocked { get; set; }
 
-    Item[] Items { get; set; }
-
-    String Information { get; set; }
-
-    Dictionary<String, Room> SurroundingRooms { get; set; }
-
-    //Method signatures
-    void DisplayScrap();
-    void DisplayRooInfo();
-}
+        // Methods
+        void DisplayCurrentRoomInformation();
+        void PickUpItem(Inventory inventory);
+        void DropItem(Inventory inventory);
+        void CheckForPuzzle(Player user);
+        void CheckForEnemy(Player user);
+        bool CheckForLock(Player user);
+    }

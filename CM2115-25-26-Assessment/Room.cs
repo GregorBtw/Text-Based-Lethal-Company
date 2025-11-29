@@ -8,16 +8,16 @@ using inventory;
 
 namespace rooms;
 
-public class Room
+public class Room : IRoom
 {
     // --- Attributes ---
-    public String Name;                               // Room's name
-    public List<Item> Items;                           // Items available in the room
-    public String Information;                         // Description / info about the room
-    public Dictionary<String, Room> SurroundingRooms; // Connections to adjacent rooms
-    public Creature Enemy;                             // Enemy present in the room
-    public Puzzle Puzzle;                              // Puzzle present in the room
-    public bool isLocked;                              // Is Room Locked
+    public String Name { get; set; }                              // Room's name
+    public List<Item> Items { get; set; }                           // Items available in the room
+    public String Information { get; set; }                         // Description / info about the room
+    public Dictionary<String, Room> SurroundingRooms { get; set; } // Connections to adjacent rooms
+    public Creature Enemy { get; set; }                             // Enemy present in the room
+    public Puzzle Puzzle { get; set; }                              // Puzzle present in the room
+    public bool isLocked { get; set; }                              // Is Room Locked
 
     // --- Constructor ---
     // Initializes a room using a RoomBuilder (Builder Pattern)

@@ -1,7 +1,7 @@
 using System;
 using interfaces.ImapBehaviour;
 
-namespace behaviours.movebehaviours;
+namespace behaviours.mapBehaviours;
 public class WareHouse : IMapBehaviour
 {
     public void Move()
