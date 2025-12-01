@@ -5,6 +5,7 @@ namespace interfaces.map;
 
 public interface IMap
 {
+    // Properties
     Dictionary<string, Room> Rooms { get; set; }
 
     IMapBehaviour MapBehaviour { get; set; }

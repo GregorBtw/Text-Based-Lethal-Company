@@ -5,7 +5,7 @@ namespace interfaces.puzzleOptions
 {
     public interface IPuzzleOptions
     {
+        // Properties
         String[] Options { get; set; }
-
     }
 }

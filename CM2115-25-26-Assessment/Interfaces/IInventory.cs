@@ -6,8 +6,11 @@ namespace Interfaces.Inventory
 {
     public interface IInventory
     {
+        // Properties
         List<Item> Items { get; }
 
+
+        //Method signature
         void AddItem(Item item);
         void RemoveItem(Item item);
 

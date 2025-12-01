@@ -15,7 +15,7 @@ namespace interfaces.room;
         Dictionary<String, Room> SurroundingRooms { get; set; }
         bool isLocked { get; set; }
 
-        // Methods
+        //Method signature
         void DisplayCurrentRoomInformation();
         void PickUpItem(Inventory inventory);
         void DropItem(Inventory inventory);

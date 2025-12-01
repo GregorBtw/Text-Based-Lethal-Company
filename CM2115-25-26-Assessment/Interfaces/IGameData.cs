@@ -11,7 +11,7 @@ namespace interfaces.GameData
         int Quota { get; set; }
         Player Player { get; }
 
-        // Methods
+        //Method signature
         void displayUIinfo(HealthBar healthBar, Room CurrentRoom);
         void PromptTerminal();
 

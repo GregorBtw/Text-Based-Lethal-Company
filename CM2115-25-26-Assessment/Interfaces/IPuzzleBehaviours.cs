@@ -6,7 +6,7 @@ namespace interfaces.puzzlebehaviours;
 
 public interface IPuzzleBehaviours
 {
-    //Attributes
+    // Properties
     String Description { get; set; }
 
     //Method signature
