@@ -8,7 +8,7 @@ public class ValueItem : IItemBehaviour
     // Use method doesn't do anything, as it's more of a collectible value item
     public void Use(Entity target, int Multiplier)
     {
-      
+        Console.WriteLine("You have used a valuable item");
     }
 
     // Equip method informs the player that the item is valuable and might be sold
