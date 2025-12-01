@@ -61,7 +61,6 @@ public class Room : IRoom
     // Handles picking up an item from the room
     public void PickUpItem(Inventory inventory)
     {
-        Console.Clear();
         Console.WriteLine("Please type the name of the item you would like to pick up: \n");
         string? rawItem = Console.ReadLine();
         string itemName = rawItem?.Trim().ToLower() ?? string.Empty;
@@ -96,8 +95,6 @@ public class Room : IRoom
 
         while (!itemDropped)
         {
-            Console.Clear();
-            inventory.DisplayItems(); 
 
             if (inventory.Items.Count == 0)
             {
